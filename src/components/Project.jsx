@@ -1,16 +1,9 @@
 import React from 'react';
-
-function Project({ title, image, appLink, repoLink }) {
-  return (
-    <div className="project">
-      <h3>{title}</h3>
-      <img src={image} alt={title} />
-      <p>
-        <a href={appLink} target="_blank" rel="noopener noreferrer">View App</a> | 
-        <a href={repoLink} target="_blank" rel="noopener noreferrer">GitHub Repo</a>
-      </p>
-    </div>
-  );
+import Card from './CardItem';
+function Project({ title, img, links, description }) {
+	return (
+		<Card title={title} img={img} description={description} links={links} />
+	);
 }
 
 export default Project;
