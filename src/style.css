@@ -5,6 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto Mono", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -155,4 +156,8 @@ footer a:hover {
 
   a.active {
     color: #333;
+  }
+
+  .card-image {
+    height: 350px;
   }
