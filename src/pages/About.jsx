@@ -6,7 +6,7 @@ function About() {
 			<Title title='About Me' />
 			<div class='profile-container'>
 				<img
-					src='../assets/images/me.jpg'
+					src='../assets/images/me.png'
 					alt='Profile Picture'
 					class='profile-pic'
 				/>
