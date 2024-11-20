@@ -134,8 +134,8 @@ footer a:hover {
   }
   
   .profile-pic {
-    width: 150px;
-    height: auto; /* Initially auto, but we’ll constrain it dynamically */
+    width: 200px;
+    height: auto;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 20px;
@@ -146,11 +146,11 @@ footer a:hover {
   }
   
   .second-paragraph {
-    margin-top: 10px; /* Ensure space between the paragraphs */
+    margin-top: 10px;
   }
   
   .profile-container > .profile-pic {
-    height: 100%; /* Set image height to match its container dynamically */
+    height: 100%;
   }
   
 
@@ -161,3 +161,12 @@ footer a:hover {
   .card-image {
     height: 350px;
   }
+
+  .first-paragraph::first-letter {
+    font-size: 3em;
+    font-weight: bold;
+    float: left;
+    margin-right: 5px;
+    line-height: 1;
+    color: #256150;
+}
