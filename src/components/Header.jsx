@@ -1,24 +1,42 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import '../style.css';
 
 function Header() {
 	return (
 		<header>
-			<h1>Jace Galloway</h1>
-			<nav>
-				<NavLink to='/' activeClassName='active' end>
-					About Me
-				</NavLink>
-				<NavLink to='/portfolio' activeClassName='active'>
-					Portfolio
-				</NavLink>
-				<NavLink to='/contact' activeClassName='active'>
-					Contact
-				</NavLink>
-				<NavLink to='/resume' activeClassName='active'>
-					Resume
-				</NavLink>
-			</nav>
+			<Navbar key={'sm'} expand={'sm'} className='bg-transparent mb-3'>
+				<Container fluid>
+					<Navbar.Brand className='text-white'>
+						Jace Galloway
+					</Navbar.Brand>
+					<Navbar.Toggle
+						aria-controls={`offcanvasNavbar-expand-sm`}
+					/>
+					<Navbar.Offcanvas
+						id={`offcanvasNavbar-expand-sm`}
+						aria-labelledby={`offcanvasNavbarLabel-expand-sm`}
+						placement='end'>
+						<Offcanvas.Header closeButton>
+							<Offcanvas.Title
+								id={`offcanvasNavbarLabel-expand-sm`}>
+								My Portfolio
+							</Offcanvas.Title>
+						</Offcanvas.Header>
+						<Offcanvas.Body>
+							<Nav className='justify-content-end flex-grow-1 pe-3'>
+								<Nav.Link href='/'>About Me</Nav.Link>
+								<Nav.Link href='/portfolio'>Portfolio</Nav.Link>
+								<Nav.Link href='/contact'>Contact</Nav.Link>
+								<Nav.Link href='/resume'>Resume</Nav.Link>
+							</Nav>
+						</Offcanvas.Body>
+					</Navbar.Offcanvas>
+				</Container>
+			</Navbar>
 		</header>
 	);
 }
