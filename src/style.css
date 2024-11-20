@@ -44,6 +44,10 @@ nav a:hover {
 }
 
 /* Main Content Styles */
+
+p {
+  text-align: justify;
+}
 h2 {
   color: #333;
   margin-bottom: 60px;

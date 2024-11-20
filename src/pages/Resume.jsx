@@ -11,12 +11,28 @@ function Resume() {
 			</a>
 
 			<section className='resume-section'>
+				<div className='mt-4'>
+					<h5>Contact Information</h5>
+					<p>
+						Email:{' '}
+						<a href='mailto:jace.galloway@gmail.com'>
+							jace.galloway@gmail.com
+						</a>
+					</p>
+					<p>
+						Phone: <a href='tel:+16193002902'>(619) 300-2902</a>
+					</p>
+				</div>
 				<h2 className='section-title'>Jace Galloway</h2>
 				<p className='summary-text'>
 					I am looking to build a career in Full Stack React Web
 					Development. My skills for this field are listed in detail
-					at the bottom of my resume. Over the years, I have gained
-					diverse experience in various roles.
+					at the bottom of my resume. I have recently graduated from
+					The Ohio State University Full Stack React Bootcamp in order
+					to switch careers. Over the years, I have gained diverse
+					experience in various roles that can be leveraged in this
+					endevor and give me a unique approach that adds immense
+					crossdisciplinary value.
 				</p>
 				<p>
 					I started as a Quality Assurance Analyst, ensuring the
