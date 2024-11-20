@@ -1,12 +1,13 @@
 import React from 'react';
 import Title from '../components/Title';
+import images from '../constants/images';
 function About() {
 	return (
 		<section>
 			<Title title='About Me' />
 			<div class='profile-container'>
 				<img
-					src='../assets/images/me.png'
+					src={images.ImgOfMe}
 					alt='Profile Picture'
 					class='profile-pic'
 				/>
