@@ -1,11 +1,9 @@
-
 /* General Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto Mono", sans-serif;
-  box-sizing: border-box;
 }
 
 body {
@@ -14,6 +12,7 @@ body {
   line-height: 1.6;
 }
 
+/* Header Styles */
 header {
   background-color: #4CAF50;
   padding: 10px 20px;
@@ -44,16 +43,7 @@ nav a:hover {
   border-radius: 4px;
 }
 
-/* main {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-} */
-
+/* Main Content Styles */
 h2 {
   color: #333;
   margin-bottom: 60px;
@@ -92,6 +82,7 @@ h2 {
   margin: 10px 0;
 }
 
+/* Footer Styles */
 footer {
   background-color: #333;
   color: white;
@@ -115,60 +106,60 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* Portfolio Page Styles */
 .portfolio-page-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
   gap: 1rem;
-  }
+}
 
-  main.container {
-    flex: 1 1;
-  }
+main.container {
+  flex: 1 1;
+}
 
-  .profile-container {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-  
-  .profile-pic {
-    width: 200px;
-    height: auto;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-  }
-  
-  .first-paragraph {
-    flex: 1;
-  }
-  
-  .second-paragraph {
-    margin-top: 10px;
-  }
-  
-  .profile-container > .profile-pic {
-    height: 100%;
-  }
-  
+.profile-container {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
 
-  a.active {
-    color: #333;
-  }
+.profile-pic {
+  width: 200px;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
 
-  .card-image {
-    height: 350px;
-  }
+.first-paragraph {
+  flex: 1;
+}
 
-  .first-paragraph::first-letter {
-    font-size: 3em;
-    font-weight: bold;
-    float: left;
-    margin-right: 5px;
-    line-height: 1;
-    color: #256150;
+.second-paragraph {
+  margin-top: 10px;
+}
+
+.profile-container > .profile-pic {
+  height: 100%;
+}
+
+a.active {
+  color: #333;
+}
+
+.card-image {
+  height: 350px;
+}
+
+.first-paragraph::first-letter {
+  font-size: 3em;
+  font-weight: bold;
+  float: left;
+  margin-right: 5px;
+  line-height: 1;
+  color: #256150;
 }
 
 /* Resume Page Styles */
@@ -253,6 +244,15 @@ footer a:hover {
   margin: 5px 0;
 }
 
+.skills-list li {
+  margin: 3px;
+}
+
+.small-title {
+  font-size: 1.2em;
+  font-weight: normal;
+}
+
 /* Header.css */
 .navbar-toggler {
   border-color: white !important;
@@ -262,6 +262,7 @@ footer a:hover {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
 }
 
+/* Media Queries */
 @media (min-width: 768px) {
   .text-md-white {
     color: white !important;
