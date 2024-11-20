@@ -48,6 +48,7 @@ nav a:hover {
 p {
   text-align: justify;
 }
+
 h2 {
   color: #333;
   margin-bottom: 60px;
@@ -125,7 +126,8 @@ main.container {
 
 .profile-container {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 20px;
 }
 
@@ -134,7 +136,7 @@ main.container {
   height: auto;
   border-radius: 50%;
   object-fit: cover;
-  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
 .first-paragraph {
@@ -270,6 +272,16 @@ a.active {
 @media (min-width: 768px) {
   .text-md-white {
     color: white !important;
+  }
+
+  .profile-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .profile-pic {
+    margin-right: 20px;
+    margin-bottom: 0;
   }
 }
 
