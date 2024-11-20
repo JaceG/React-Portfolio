@@ -31,12 +31,10 @@ function Contact() {
 		<section>
 			<Title title='Contact' />
 			<form>
-				{' '}
 				<div className='mb-3'>
-					{' '}
 					<label htmlFor='name' className='form-label'>
 						Name:
-					</label>{' '}
+					</label>
 					<input
 						type='text'
 						name='name'
@@ -45,16 +43,15 @@ function Contact() {
 						onChange={handleChange}
 						onBlur={handleBlur}
 						id='name'
-					/>{' '}
+					/>
 					{errors.name && (
 						<div className='text-danger'>{errors.name}</div>
-					)}{' '}
-				</div>{' '}
+					)}
+				</div>
 				<div className='mb-3'>
-					{' '}
 					<label htmlFor='email' className='form-label'>
 						Email:
-					</label>{' '}
+					</label>
 					<input
 						type='email'
 						name='email'
@@ -63,16 +60,15 @@ function Contact() {
 						onChange={handleChange}
 						onBlur={handleBlur}
 						id='email'
-					/>{' '}
+					/>
 					{errors.email && (
 						<div className='text-danger'>{errors.email}</div>
-					)}{' '}
-				</div>{' '}
+					)}
+				</div>
 				<div className='mb-3'>
-					{' '}
 					<label htmlFor='message' className='form-label'>
 						Message:
-					</label>{' '}
+					</label>
 					<textarea
 						name='message'
 						className='form-control'
@@ -81,15 +77,27 @@ function Contact() {
 						onBlur={handleBlur}
 						id='message'
 						rows='4'
-					/>{' '}
+					/>
 					{errors.message && (
 						<div className='text-danger'>{errors.message}</div>
-					)}{' '}
-				</div>{' '}
+					)}
+				</div>
 				<button type='submit' className='btn btn-primary'>
 					Send Message
-				</button>{' '}
+				</button>
 			</form>
+			<div className='mt-4'>
+				<h5>Contact Information</h5>
+				<p>
+					Email:{' '}
+					<a href='mailto:jace.galloway@gmail.com'>
+						jace.galloway@gmail.com
+					</a>
+				</p>
+				<p>
+					Phone: <a href='tel:+16193002902'>(619) 300-2902</a>
+				</p>
+			</div>
 		</section>
 	);
 }
