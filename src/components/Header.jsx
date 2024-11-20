@@ -28,10 +28,24 @@ function Header() {
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='justify-content-end flex-grow-1 pe-3'>
-								<Nav.Link href='/'>About Me</Nav.Link>
-								<Nav.Link href='/portfolio'>Portfolio</Nav.Link>
-								<Nav.Link href='/contact'>Contact</Nav.Link>
-								<Nav.Link href='/resume'>Resume</Nav.Link>
+								<Nav.Link href='/' className='text-md-white'>
+									About Me
+								</Nav.Link>
+								<Nav.Link
+									href='/portfolio'
+									className='text-md-white'>
+									Portfolio
+								</Nav.Link>
+								<Nav.Link
+									href='/contact'
+									className='text-md-white'>
+									Contact
+								</Nav.Link>
+								<Nav.Link
+									href='/resume'
+									className='text-md-white'>
+									Resume
+								</Nav.Link>
 							</Nav>
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
