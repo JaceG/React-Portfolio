@@ -31,8 +31,8 @@ function Resume() {
 					The Ohio State University Full Stack React Bootcamp in order
 					to switch careers. Over the years, I have gained diverse
 					experience in various roles that can be leveraged in this
-					endevor and give me a unique approach that adds immense
-					crossdisciplinary value.
+					endeavor and give me a unique approach that adds immense
+					cross-disciplinary value.
 				</p>
 				<p>
 					I started as a Quality Assurance Analyst, ensuring the
@@ -52,7 +52,7 @@ function Resume() {
 					<li className='work-item'>
 						<h3 className='job-title'>Insurance Broker</h3>
 						<p>
-							<strong>Independant</strong> –{' '}
+							<strong>Independent</strong> –{' '}
 							<em>Tampa, Florida</em>
 						</p>
 					</li>
@@ -60,9 +60,8 @@ function Resume() {
 						<h3 className='job-title'>Driver</h3>
 						<p>
 							<strong>Uber & Lyft</strong> –{' '}
-							<em>San Diego, California - </em>
-							<em>Tampa, Florida - </em>
-							<em>Columbus, Ohio</em>
+							<em>San Diego, California</em>, /{' '}
+							<em>Tampa, Florida</em>, / <em>Columbus, Ohio</em>
 						</p>
 					</li>
 					<li className='work-item'>
@@ -121,9 +120,9 @@ function Resume() {
 				<ul className='skills-list'>
 					<li>HTML</li>
 					<li>CSS</li>
-					<li>Javascript</li>
+					<li>JavaScript</li>
 					<li>React</li>
-					<li>Typescript</li>
+					<li>TypeScript</li>
 					<li>Wireframing</li>
 				</ul>
 
@@ -153,7 +152,7 @@ function Resume() {
 
 				<h3 className='small-title'>Other Skills:</h3>
 				<ul className='skills-list'>
-					<li>Chat GPT</li>
+					<li>ChatGPT</li>
 					<li>Copilot</li>
 					<li>Testing</li>
 					<li>Refactoring</li>
