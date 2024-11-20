@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -28,21 +29,27 @@ function Header() {
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='justify-content-end flex-grow-1 pe-3'>
-								<Nav.Link href='/' className='text-md-white'>
+								<Nav.Link
+									as={Link}
+									to='/'
+									className='text-md-white'>
 									About Me
 								</Nav.Link>
 								<Nav.Link
-									href='/portfolio'
+									as={Link}
+									to='/portfolio'
 									className='text-md-white'>
 									Portfolio
 								</Nav.Link>
 								<Nav.Link
-									href='/contact'
+									as={Link}
+									to='/contact'
 									className='text-md-white'>
 									Contact
 								</Nav.Link>
 								<Nav.Link
-									href='/resume'
+									as={Link}
+									to='/resume'
 									className='text-md-white'>
 									Resume
 								</Nav.Link>
