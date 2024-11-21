@@ -10,12 +10,14 @@ const socialLinks = [
 function Footer() {
 	return (
 		<footer>
-			<p>© 2024 Jace Galloway</p>
-			<p>
-				{socialLinks?.map((url) => {
-					return <SocialIcon target='_blank' url={url} />;
-				})}
-			</p>
+			<div>
+				<p>© 2024 Jace Galloway</p>
+				<p>
+					{socialLinks?.map((url) => {
+						return <SocialIcon target='_blank' url={url} />;
+					})}
+				</p>
+			</div>
 		</footer>
 	);
 }
