@@ -1,12 +1,16 @@
 import React from 'react';
 import Title from '../components/Title';
 import '../style.css';
+import images from '../constants/images';
 
 function Resume() {
 	return (
 		<section className='resume-container'>
 			<Title title='Resume' />
-			<a href='path/to/resume.pdf' className='download-link' download>
+			<a
+				href={images.JaceResumeDownload}
+				className='download-link'
+				download>
 				Download Resume
 			</a>
 

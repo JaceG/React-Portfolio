@@ -8,6 +8,7 @@ import ReadmeGenerator from '../../assets/images/Readme-Generator.png';
 import RpsGame from '../../assets/images/RPS-Game.png';
 import VehicleBuilder from '../../assets/images/Vehicle-Builder.png';
 import WeatherDashboard from '../../assets/images/Weather-Dashboard.png';
+import JaceResumeDownload from '../../assets/downloads/Jace-Resume.pdf';
 
 export default {
 	ImgOfMe,
@@ -20,4 +21,5 @@ export default {
 	RpsGame,
 	VehicleBuilder,
 	WeatherDashboard,
+	JaceResumeDownload,
 };
