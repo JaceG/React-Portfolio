@@ -15,7 +15,7 @@ This is a single-page application portfolio built using React. It showcases my s
 
 ## Usage
 
-To use this application, simply goto [https://weather-dashboard-g7bd.onrender.com/](https://thunderous-tapioca-0a8ebe.netlify.app/)
+To use this application, simply goto [https://thunderous-tapioca-0a8ebe.netlify.app/](https://thunderous-tapioca-0a8ebe.netlify.app/)
 
 ## Contributing
 
