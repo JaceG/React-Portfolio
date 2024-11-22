@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../style.css'; // Assuming your CSS file is named style.css
+import '../style.css'; // Ensure this file is correctly linked
 
 const Bookshelf = () => {
 	const [books, setBooks] = useState([]);
@@ -8,13 +8,10 @@ const Bookshelf = () => {
 	const [error, setError] = useState(null);
 
 	const fetchBooks = async () => {
-		const url = 'http://localhost:5005/api/books'; // Backend proxy for fetching book data
-
+		const url = 'https://react-portfolio-7z0l.onrender.com/api/books'; // Backend URL
 		try {
 			setLoading(true); // Start loading
 			const response = await axios.get(url); // Fetch XML data from the backend
-
-			// Parse XML using DOMParser
 			const parser = new DOMParser();
 			const xmlDoc = parser.parseFromString(
 				response.data,
@@ -27,12 +24,10 @@ const Bookshelf = () => {
 					const rawImageUrl =
 						item.getElementsByTagName('book_image_url')[0]
 							?.textContent || '';
-
-					// Replace small image suffix with the largest size available
 					const highQualityImageUrl = rawImageUrl.replace(
 						/_SX\d+_/,
 						'_SX500_'
-					);
+					); // Use high-quality images
 
 					return {
 						title:
@@ -53,23 +48,19 @@ const Bookshelf = () => {
 			);
 
 			setBooks(items); // Update state with parsed books
+			setError(null); // Clear any existing errors
 		} catch (err) {
 			console.error('Error fetching or parsing RSS feed:', err);
-			setError('Failed to fetch data. Please try again later.'); // Set error message
+			setError('Failed to fetch data. Please try again later.');
 		} finally {
 			setLoading(false); // End loading state
 		}
 	};
 
 	useEffect(() => {
-		// Fetch books on component mount
-		fetchBooks();
-
-		// Set up a 5-minute interval to fetch books
-		const interval = setInterval(fetchBooks, 300000);
-
-		// Clear the interval on component unmount
-		return () => clearInterval(interval);
+		fetchBooks(); // Initial fetch
+		const intervalId = setInterval(fetchBooks, 300000); // Refresh every 5 minutes
+		return () => clearInterval(intervalId); // Cleanup interval on unmount
 	}, []);
 
 	if (loading)
@@ -78,7 +69,7 @@ const Bookshelf = () => {
 
 	return (
 		<div className='bookshelf-container'>
-			<h1 className='bookshelf-title'>My Bookshelf</h1>
+			<h1 className='bookshelf-title'>My AI Bookshelf</h1>
 			<ul className='bookshelf-list'>
 				{books.map((book, index) => (
 					<li className='bookshelf-item' key={book.title + index}>

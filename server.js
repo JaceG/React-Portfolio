@@ -3,7 +3,13 @@ import axios from 'axios';
 import cors from 'cors';
 
 const app = express();
-app.use(cors()); // Allow CORS
+
+// Configure CORS to allow requests from your Netlify site
+app.use(
+	cors({
+		origin: 'https://thunderous-tapioca-0a8ebe.netlify.app', // Your Netlify frontend URL
+	})
+);
 
 // Route to fetch books from Goodreads
 app.get('/api/books', async (req, res) => {
@@ -11,29 +17,16 @@ app.get('/api/books', async (req, res) => {
 		const response = await axios.get(
 			'https://www.goodreads.com/review/list_rss/72594950?key=k8BP10mge61MZ_dQViUb3Dw2bqP9p961Wj4AMP5pE5JZSDha&shelf=ai'
 		);
-		res.send(response.data); // Send the raw RSS data back to the client
+		res.set('Content-Type', 'application/xml');
+		res.send(response.data);
 	} catch (error) {
-		console.error('Error fetching books:', error);
-		res.status(500).send('Error fetching books from Goodreads');
+		console.error('Error fetching data from Goodreads:', error);
+		res.status(500).send('Error fetching data from Goodreads');
 	}
 });
 
-// Route to proxy image requests
-app.get('/api/image', async (req, res) => {
-	const imageUrl = req.query.url; // Get the image URL from the query parameter
-	try {
-		const response = await axios.get(imageUrl, {
-			responseType: 'arraybuffer',
-		}); // Fetch image as binary data
-		res.set('Content-Type', response.headers['content-type']); // Forward the correct content type
-		res.send(response.data); // Send the image data
-	} catch (error) {
-		console.error('Error fetching image:', error);
-		res.status(500).send('Error fetching image');
-	}
-});
-
-const PORT = 5005; // Port number
+// Start the server
+const PORT = process.env.PORT || 5005;
 app.listen(PORT, () => {
-	console.log(`Proxy server running at http://localhost:${PORT}`);
+	console.log(`Server running at http://localhost:${PORT}`);
 });
