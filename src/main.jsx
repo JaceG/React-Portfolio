@@ -7,6 +7,7 @@ import About from './pages/About';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import Resume from './pages/Resume';
+import Books from './pages/Books';
 import './style.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,6 +21,7 @@ function MainApp() {
 					<Route path='/portfolio' element={<Portfolio />} />
 					<Route path='/contact' element={<Contact />} />
 					<Route path='/resume' element={<Resume />} />
+					<Route path='/books' element={<Books />} />
 				</Routes>
 			</main>
 			<Footer />

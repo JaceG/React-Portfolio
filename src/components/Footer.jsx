@@ -1,25 +1,43 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 
-const socialLinks = [
-	'https://github.com/JaceG',
-	'https://www.linkedin.com/in/jace-galloway-6833a4249',
-	'https://stackoverflow.com/users/1450474/jace',
-];
+const Footer = () => {
+	const socialLinks = [
+		{ url: 'https://github.com/', label: 'GitHub' },
+		{ url: 'https://linkedin.com/', label: 'LinkedIn' },
+		{ url: 'https://stackoverflow.com/', label: 'StackOverflow' },
+	];
 
-function Footer() {
 	return (
-		<footer>
-			<div>
-				<p>© 2024 Jace Galloway</p>
-				<p>
-					{socialLinks?.map((url) => {
-						return <SocialIcon target='_blank' url={url} />;
-					})}
-				</p>
+		<footer
+			style={{
+				backgroundColor: '#333',
+				color: '#fff',
+				padding: '20px 0',
+				textAlign: 'center',
+			}}>
+			<div
+				style={{
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					flexDirection: 'column',
+				}}>
+				<div style={{ marginBottom: '10px' }}>
+					&copy; 2024 Jace Galloway
+				</div>
+				<div style={{ display: 'flex', gap: '10px' }}>
+					{socialLinks.map((link, index) => (
+						<SocialIcon
+							key={link.label + index}
+							url={link.url}
+							style={{ height: 60, width: 60 }}
+						/>
+					))}
+				</div>
 			</div>
 		</footer>
 	);
-}
+};
 
 export default Footer;

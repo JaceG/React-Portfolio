@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import Title from '../components/Title';
 import images from '../constants/images';
 
@@ -42,12 +43,7 @@ function About() {
 				<p className='second-paragraph'>
 					Beyond coding, what sets Jace apart is his skills in
 					leveraging advanced AI tools like ChatGPT from his{' '}
-					<a
-						href='https://www.goodreads.com/review/list/72594950-jace?ref=nav_mybooks&shelf=ai'
-						target='_blank'
-						rel='noopener noreferrer'>
-						unique interdisciplinary background
-					</a>{' '}
+					<Link to='/books'>unique interdisciplinary background</Link>{' '}
 					in subjects such as communication, psychology, and bias.
 					Also, advanced English language topics such as linguistics,
 					the roots of language, how children learn language, and

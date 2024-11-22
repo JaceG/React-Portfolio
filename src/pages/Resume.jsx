@@ -1,5 +1,6 @@
 import React from 'react';
 import Title from '../components/Title';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import '../style.css';
 import images from '../constants/images';
 
@@ -35,8 +36,8 @@ function Resume() {
 					The Ohio State University Full Stack React Bootcamp in order
 					to switch careers. Over the years, I have gained diverse
 					experience in various roles that can be leveraged in this
-					endeavor and give me a unique approach that adds immense
-					cross-disciplinary value.
+					endeavor and give me a unique approach that adds immense{' '}
+					<Link to='/books'>interdisciplinary value</Link> .
 				</p>
 				<p>
 					I started as a Quality Assurance Analyst, ensuring the

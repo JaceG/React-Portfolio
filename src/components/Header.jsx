@@ -46,6 +46,13 @@ function Header() {
 								</Nav.Link>
 								<Nav.Link
 									as={Link}
+									to='/books'
+									className='text-md-white'
+									onClick={handleClose}>
+									Books
+								</Nav.Link>
+								<Nav.Link
+									as={Link}
 									to='/portfolio'
 									className='text-md-white'
 									onClick={handleClose}>

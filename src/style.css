@@ -262,6 +262,70 @@ a.active {
   font-weight: normal;
 }
 
+/* Bookshelf Styles */
+.bookshelf-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.bookshelf-title {
+  text-align: center;
+  color: #4a90e2;
+}
+
+.bookshelf-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.bookshelf-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.bookshelf-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bookshelf-book-title {
+  font-size: 18px;
+  color: #333;
+}
+
+.bookshelf-author,
+.bookshelf-pub-date {
+  margin: 5px 0;
+  color: #555;
+}
+
+.bookshelf-link {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.bookshelf-link:hover {
+  text-decoration: underline;
+}
+
+/* Loading and Error States */
+.loading,
+.error {
+  text-align: center;
+  color: #4a90e2;
+  font-size: 1.2em;
+  padding: 20px 0;
+}
+
+
 /* Header.css */
 .navbar-toggler {
   border-color: white !important;
