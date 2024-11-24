@@ -163,12 +163,12 @@ a.active {
 }
 
 .first-paragraph::first-letter {
-  font-size: 3em;
+  font-size: 5em;
   font-weight: bold;
   float: left;
-  margin-right: 5px;
+  margin-right: 10px;
   line-height: 1;
-  color: #256150;
+  color: #4CAF50;
 }
 
 /* Resume Page Styles */
