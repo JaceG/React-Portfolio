@@ -75,7 +75,7 @@ const Bookshelf = () => {
 
 	return (
 		<div className='bookshelf-container'>
-			<h1 className='bookshelf-title'>My AI Bookshelf</h1>
+			<h1 className='bookshelf-title'>My Bookshelf</h1>
 			<ul className='bookshelf-list'>
 				{books.map((book, index) => (
 					<li className='bookshelf-item' key={book.title + index}>
