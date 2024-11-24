@@ -64,7 +64,13 @@ const Bookshelf = () => {
 	}, []);
 
 	if (loading)
-		return <div className='loading'>Loading your bookshelf...</div>;
+		return (
+			<div className='loading'>
+				Loading bookshelf... wait roughly 60 seconds for the bookshelf
+				page to load to see a list of books I've read relevant to my
+				experience.
+			</div>
+		);
 	if (error) return <div className='error'>{error}</div>;
 
 	return (
