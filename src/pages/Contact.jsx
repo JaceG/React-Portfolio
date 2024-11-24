@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import Title from '../components/Title';
 
+const initialData = {
+	name: '',
+	email: '',
+	message: '',
+};
+
 function Contact() {
 	const [formData, setFormData] = useState({
-		name: '',
-		email: '',
-		message: '',
+		...initialData,
 	});
 	const [errors, setErrors] = useState({});
 
@@ -13,24 +17,43 @@ function Contact() {
 
 	const handleChange = (e) => {
 		setFormData({ ...formData, [e.target.name]: e.target.value });
+		handleErrors(e.target.name, e.target.value);
 	};
 
-	const handleBlur = (e) => {
-		const { name, value } = e.target;
-		if (!value)
+	const handleErrors = (name, value) => {
+		let isValid = true;
+		if (!value) {
 			setErrors((prev) => ({
 				...prev,
 				[name]: 'This field is required',
 			}));
-		else if (name === 'email' && !validateEmail(value))
+			isValid = false;
+		} else if (name === 'email' && !validateEmail(value)) {
 			setErrors((prev) => ({ ...prev, [name]: 'Invalid email' }));
-		else setErrors((prev) => ({ ...prev, [name]: '' }));
+			isValid = false;
+		} else {
+			setErrors((prev) => ({ ...prev, [name]: '' }));
+			isValid = true;
+		}
+		return isValid;
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const names = Object.keys(formData);
+		const formErrors = names.filter(
+			(name) => !handleErrors(name, formData[name])
+		);
+		if (formErrors.length === 0) {
+			alert('Thanks for reaching out. I will get back to you soon.');
+			setFormData({ ...initialData });
+		}
 	};
 
 	return (
 		<section>
 			<Title title='Contact' />
-			<form>
+			<form onSubmit={handleSubmit}>
 				<div className='mb-3'>
 					<label htmlFor='name' className='form-label'>
 						Name:
@@ -41,7 +64,6 @@ function Contact() {
 						className='form-control'
 						value={formData.name}
 						onChange={handleChange}
-						onBlur={handleBlur}
 						id='name'
 					/>
 					{errors.name && (
@@ -58,7 +80,6 @@ function Contact() {
 						className='form-control'
 						value={formData.email}
 						onChange={handleChange}
-						onBlur={handleBlur}
 						id='email'
 					/>
 					{errors.email && (
@@ -74,7 +95,6 @@ function Contact() {
 						className='form-control'
 						value={formData.message}
 						onChange={handleChange}
-						onBlur={handleBlur}
 						id='message'
 						rows='4'
 					/>
