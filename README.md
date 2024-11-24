@@ -12,10 +12,13 @@ This is a single-page application portfolio built using React. It showcases my s
 -   [Contributing](#contributing)
 -   [Questions](#questions)
 -   [Credits](#credits)
+-   [Preview](#preview)
 
 ## Usage
 
 To use this application, simply goto [https://thunderous-tapioca-0a8ebe.netlify.app/](https://thunderous-tapioca-0a8ebe.netlify.app/)
+
+Wait roughly 60 seconds for the bookshelf page to load to see a list of books I've read relevant to my experience.
 
 ## Contributing
 
@@ -28,3 +31,8 @@ For any questions, please contact me at jace.galloway@gmail.com. You can also fi
 ## Credits
 
 Credits: This project was created as part of a coding bootcamp challenge. - Sources and References: Portions of the code and guidance were provided with assistance from ChatGPT, Tutors, and my Instructors.
+
+## Preview
+
+![Portfolio Screenshot](./assets/images/Portfolio-Screenshot.png)
+![Resume Screenshot](./assets/images/Resume-Screenshot.png)
