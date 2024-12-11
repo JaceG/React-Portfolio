@@ -73,38 +73,81 @@ const Bookshelf = () => {
 		);
 	if (error) return <div className='error'>{error}</div>;
 
+	const featuredBooks = books.slice(0, 2);
+	const otherBooks = books.slice(2);
+
 	return (
-		<div className='bookshelf-container'>
-			<h1 className='bookshelf-title'>My Bookshelf</h1>
-			<ul className='bookshelf-list'>
-				{books.map((book, index) => (
-					<li className='bookshelf-item' key={book.title + index}>
-						<img
-							className='bookshelf-image'
-							src={
-								book.image_url ||
-								'https://via.placeholder.com/500'
-							}
-							alt={book.title || 'No title available'}
-						/>
-						<h2 className='bookshelf-book-title'>{book.title}</h2>
-						<p className='bookshelf-author'>
-							<strong>Author:</strong> {book.author_name}
-						</p>
-						<p className='bookshelf-pub-date'>
-							<strong>Published:</strong> {book.pub_date}
-						</p>
-						<a
-							className='bookshelf-link'
-							href={book.link}
-							target='_blank'
-							rel='noopener noreferrer'>
-							View on Goodreads
-						</a>
-					</li>
-				))}
-			</ul>
-		</div>
+		<section className='resume-container'>
+			<div className='bookshelf-container'>
+				<h1 className='bookshelf-title'>My Bookshelf</h1>
+				<h2 className='featured-title'>⭐Featured Books⭐</h2>
+				<ul className='featured-bookshelf-list'>
+					{featuredBooks.map((book, index) => (
+						<li
+							className='featured-bookshelf-item'
+							key={book.title + index}>
+							⭐
+							<img
+								className='featured-bookshelf-image'
+								src={
+									book.image_url ||
+									'https://via.placeholder.com/500'
+								}
+								alt={book.title || 'No title available'}
+							/>
+							⭐
+							<h2 className='featured-bookshelf-book-title'>
+								⭐{book.title}⭐
+							</h2>
+							<p className='featured-bookshelf-author'>
+								<strong>Author:</strong> {book.author_name}
+							</p>
+							<p className='featured-bookshelf-pub-date'>
+								<strong>Published:</strong> {book.pub_date}
+							</p>
+							<a
+								className='featured-bookshelf-link'
+								href={book.link}
+								target='_blank'
+								rel='noopener noreferrer'>
+								View on Goodreads
+							</a>
+						</li>
+					))}
+				</ul>
+				<h2 className='bookshelf-title'>Other Books</h2>
+				<ul className='bookshelf-list'>
+					{otherBooks.map((book, index) => (
+						<li className='bookshelf-item' key={book.title + index}>
+							<img
+								className='bookshelf-image'
+								src={
+									book.image_url ||
+									'https://via.placeholder.com/500'
+								}
+								alt={book.title || 'No title available'}
+							/>
+							<h2 className='bookshelf-book-title'>
+								{book.title}
+							</h2>
+							<p className='bookshelf-author'>
+								<strong>Author:</strong> {book.author_name}
+							</p>
+							<p className='bookshelf-pub-date'>
+								<strong>Published:</strong> {book.pub_date}
+							</p>
+							<a
+								className='bookshelf-link'
+								href={book.link}
+								target='_blank'
+								rel='noopener noreferrer'>
+								View on Goodreads
+							</a>
+						</li>
+					))}
+				</ul>
+			</div>
+		</section>
 	);
 };
 

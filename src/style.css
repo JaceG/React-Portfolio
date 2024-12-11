@@ -6,15 +6,28 @@
   font-family: "Roboto Mono", sans-serif;
 }
 
+/* CSS Variables for Colors */
+:root {
+  --primary-color: #4CAF50;
+  --secondary-color: #333;
+  --background-color: #f4f4f9;
+  --text-color: #555;
+  --link-color: #4a90e2;
+  --link-hover-color: #45a049;
+  --footer-bg-color: #333;
+  --footer-text-color: #ccc;
+  --footer-link-color: #f4f4f4;
+}
+
 body {
-  background-color: #f4f4f9;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
 /* Header Styles */
 header {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   padding: 10px 20px;
   text-align: center;
   color: white;
@@ -39,18 +52,17 @@ nav a {
 }
 
 nav a:hover {
-  background-color: #45a049;
+  background-color: var(--link-hover-color);
   border-radius: 4px;
 }
 
 /* Main Content Styles */
-
 p {
   text-align: justify;
 }
 
 h2 {
-  color: #333;
+  color: var(--secondary-color);
   margin-bottom: 60px;
   font-size: 1.8em;
   text-align: center;
@@ -82,7 +94,7 @@ h2 {
 }
 
 .project h3 {
-  color: #4CAF50;
+  color: var(--primary-color);
   font-size: 1.5em;
   margin: 10px 0;
 }
@@ -92,7 +104,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #333;
+  background-color: var(--footer-bg-color);
   color: white;
   text-align: center;
   padding: 15px 0;
@@ -100,12 +112,12 @@ footer {
 }
 
 footer p, footer a {
-  color: #ccc;
+  color: var(--footer-text-color);
   font-size: 0.9em;
 }
 
 footer a {
-  color: #f4f4f4;
+  color: var(--footer-link-color);
   text-decoration: none;
   margin: 0 5px;
 }
@@ -155,7 +167,7 @@ main.container {
 }
 
 a.active {
-  color: #333;
+  color: var(--secondary-color);
 }
 
 .card-image {
@@ -168,7 +180,7 @@ a.active {
   float: left;
   margin-right: 10px;
   line-height: 1;
-  color: #4CAF50;
+  color: var(--primary-color);
 }
 
 /* Resume Page Styles */
@@ -185,14 +197,14 @@ a.active {
   display: inline-block;
   margin: 10px 0;
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: var(--primary-color);
   color: white;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .download-link:hover {
-  background-color: #45a049;
+  background-color: var(--link-hover-color);
 }
 
 .resume-section {
@@ -200,16 +212,16 @@ a.active {
 }
 
 .section-title {
-  color: #333;
+  color: var(--secondary-color);
   font-size: 1.5em;
   margin-bottom: 10px;
-  border-bottom: 2px solid #4caf50;
+  border-bottom: 2px solid var(--primary-color);
   padding-bottom: 5px;
 }
 
 .summary-text {
   font-size: 1.1em;
-  color: #555;
+  color: var(--text-color);
 }
 
 .work-experience-list,
@@ -230,20 +242,20 @@ a.active {
 .degree,
 .project-name {
   font-size: 1.2em;
-  color: #4caf50;
+  color: var(--primary-color);
 }
 
 .job-responsibilities {
   list-style: disc;
   padding-left: 20px;
-  color: #555;
+  color: var(--text-color);
 }
 
 .skills-list li {
   display: inline-block;
   margin-right: 10px;
   padding: 5px 10px;
-  background-color: #f4f4f9;
+  background-color: var(--background-color);
   border: 1px solid #ddd;
   border-radius: 5px;
   font-size: 0.9em;
@@ -270,15 +282,23 @@ a.active {
 
 .bookshelf-title {
   text-align: center;
-  color: #4a90e2;
+  color: var(--link-color);
 }
 
-.bookshelf-list {
+.featured-title {
+  text-align: center;
+  color: var(--link-color);
+  margin-top: 40px;
+}
+
+.bookshelf-list,
+.featured-bookshelf-list {
   list-style-type: none;
   padding: 0;
 }
 
-.bookshelf-item {
+.bookshelf-item,
+.featured-bookshelf-item {
   margin-bottom: 20px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
@@ -288,7 +308,8 @@ a.active {
   text-align: center;
 }
 
-.bookshelf-image {
+.bookshelf-image,
+.featured-bookshelf-image {
   width: 200px;
   height: auto;
   margin-bottom: 10px;
@@ -296,35 +317,45 @@ a.active {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.bookshelf-book-title {
+.bookshelf-book-title,
+.featured-bookshelf-book-title {
   font-size: 18px;
-  color: #333;
+  color: var(--secondary-color);
 }
 
 .bookshelf-author,
-.bookshelf-pub-date {
+.featured-bookshelf-author,
+.bookshelf-pub-date,
+.featured-bookshelf-pub-date {
   margin: 5px 0;
-  color: #555;
+  color: var(--text-color);
 }
 
-.bookshelf-link {
-  color: #4a90e2;
+.bookshelf-link,
+.featured-bookshelf-link {
+  color: var(--link-color);
   text-decoration: none;
 }
 
-.bookshelf-link:hover {
+.bookshelf-link:hover,
+.featured-bookshelf-link:hover {
   text-decoration: underline;
+}
+
+/* Featured Bookshelf Item */
+.featured-bookshelf-item {
+  border: 2px solid var(--link-color);
+  background: #e9f5ff;
 }
 
 /* Loading and Error States */
 .loading,
 .error {
   text-align: center;
-  color: #4a90e2;
+  color: var(--link-color);
   font-size: 1.2em;
   padding: 20px 0;
 }
-
 
 /* Header.css */
 .navbar-toggler {
@@ -339,6 +370,7 @@ a.active {
   background-color: rgba(255, 255, 255, 0.2);
   transition: background-color 0.2s;
 }
+
 
 
 /* Media Queries */

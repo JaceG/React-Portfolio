@@ -51,72 +51,74 @@ function Contact() {
 	};
 
 	return (
-		<section>
-			<Title title='Contact' />
-			<form onSubmit={handleSubmit}>
-				<div className='mb-3'>
-					<label htmlFor='name' className='form-label'>
-						Name:
-					</label>
-					<input
-						type='text'
-						name='name'
-						className='form-control'
-						value={formData.name}
-						onChange={handleChange}
-						id='name'
-					/>
-					{errors.name && (
-						<div className='text-danger'>{errors.name}</div>
-					)}
+		<section className='resume-container'>
+			<div className='contact-container'>
+				<Title title='Contact' />
+				<form onSubmit={handleSubmit}>
+					<div className='mb-3'>
+						<label htmlFor='name' className='form-label'>
+							Name:
+						</label>
+						<input
+							type='text'
+							name='name'
+							className='form-control'
+							value={formData.name}
+							onChange={handleChange}
+							id='name'
+						/>
+						{errors.name && (
+							<div className='text-danger'>{errors.name}</div>
+						)}
+					</div>
+					<div className='mb-3'>
+						<label htmlFor='email' className='form-label'>
+							Email:
+						</label>
+						<input
+							type='email'
+							name='email'
+							className='form-control'
+							value={formData.email}
+							onChange={handleChange}
+							id='email'
+						/>
+						{errors.email && (
+							<div className='text-danger'>{errors.email}</div>
+						)}
+					</div>
+					<div className='mb-3'>
+						<label htmlFor='message' className='form-label'>
+							Message:
+						</label>
+						<textarea
+							name='message'
+							className='form-control'
+							value={formData.message}
+							onChange={handleChange}
+							id='message'
+							rows='4'
+						/>
+						{errors.message && (
+							<div className='text-danger'>{errors.message}</div>
+						)}
+					</div>
+					<button type='submit' className='btn btn-primary'>
+						Send Message
+					</button>
+				</form>
+				<div className='mt-4'>
+					<h5>Contact Information</h5>
+					<p>
+						Email:{' '}
+						<a href='mailto:jace.galloway@gmail.com'>
+							jace.galloway@gmail.com
+						</a>
+					</p>
+					<p>
+						Phone: <a href='tel:+16193002902'>(619) 300-2902</a>
+					</p>
 				</div>
-				<div className='mb-3'>
-					<label htmlFor='email' className='form-label'>
-						Email:
-					</label>
-					<input
-						type='email'
-						name='email'
-						className='form-control'
-						value={formData.email}
-						onChange={handleChange}
-						id='email'
-					/>
-					{errors.email && (
-						<div className='text-danger'>{errors.email}</div>
-					)}
-				</div>
-				<div className='mb-3'>
-					<label htmlFor='message' className='form-label'>
-						Message:
-					</label>
-					<textarea
-						name='message'
-						className='form-control'
-						value={formData.message}
-						onChange={handleChange}
-						id='message'
-						rows='4'
-					/>
-					{errors.message && (
-						<div className='text-danger'>{errors.message}</div>
-					)}
-				</div>
-				<button type='submit' className='btn btn-primary'>
-					Send Message
-				</button>
-			</form>
-			<div className='mt-4'>
-				<h5>Contact Information</h5>
-				<p>
-					Email:{' '}
-					<a href='mailto:jace.galloway@gmail.com'>
-						jace.galloway@gmail.com
-					</a>
-				</p>
-				<p>
-					Phone: <a href='tel:+16193002902'>(619) 300-2902</a>
-				</p>
 			</div>
 		</section>
 	);

@@ -37,7 +37,7 @@ function Resume() {
 					to switch careers. Over the years, I have gained diverse
 					experience in various roles that can be leveraged in this
 					endeavor and give me a unique approach that adds immense{' '}
-					<Link to='/books'>interdisciplinary value</Link> .
+					<Link to='/books'>interdisciplinary value</Link>.
 				</p>
 				<p>
 					I started as a Quality Assurance Analyst, ensuring the

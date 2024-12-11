@@ -123,12 +123,14 @@ function Portfolio() {
 	];
 
 	return (
-		<section>
-			<Title title='Portfolio' />
-			<div className='row gx-5'>
-				{projects.map((project, index) => (
-					<Project key={index} {...project} />
-				))}
+		<section className='resume-container'>
+			<div className='portfolio-container'>
+				<Title title='Portfolio' />
+				<div className='row gx-5'>
+					{projects.map((project, index) => (
+						<Project key={index} {...project} />
+					))}
+				</div>
 			</div>
 		</section>
 	);
