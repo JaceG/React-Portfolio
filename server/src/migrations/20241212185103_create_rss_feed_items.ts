@@ -1,7 +1,12 @@
 import { QueryInterface, DataTypes, Sequelize } from 'sequelize';
 
 module.exports = {
-	up: async (queryInterface: QueryInterface) => {
+	up: async (queryInterface: QueryInterface, Sequelize: Sequelize) => {
+		// Enable the uuid-ossp extension
+		await queryInterface.sequelize.query(
+			'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+		);
+
 		await queryInterface.createTable('RssFeedItems', {
 			id: {
 				type: DataTypes.UUID,
@@ -38,5 +43,7 @@ module.exports = {
 
 	down: async (queryInterface: QueryInterface) => {
 		await queryInterface.dropTable('RssFeedItems');
+		// Optionally, you can drop the extension if it's no longer needed
+		// await queryInterface.sequelize.query('DROP EXTENSION IF EXISTS "uuid-ossp";');
 	},
 };
