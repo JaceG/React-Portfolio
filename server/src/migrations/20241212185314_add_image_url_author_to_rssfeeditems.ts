@@ -1,7 +1,7 @@
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
-	up: async (queryInterface: QueryInterface): Promise<void> => {
+	up: async (queryInterface: QueryInterface) => {
 		await queryInterface.addColumn('RssFeedItems', 'image_url', {
 			type: DataTypes.STRING,
 			allowNull: true,
@@ -13,7 +13,7 @@ module.exports = {
 		});
 	},
 
-	down: async (queryInterface: QueryInterface): Promise<void> => {
+	down: async (queryInterface: QueryInterface) => {
 		await queryInterface.removeColumn('RssFeedItems', 'image_url');
 		await queryInterface.removeColumn('RssFeedItems', 'author');
 	},

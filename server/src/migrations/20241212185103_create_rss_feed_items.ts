@@ -1,7 +1,7 @@
 import { QueryInterface, DataTypes, Sequelize } from 'sequelize';
 
 module.exports = {
-	up: async (queryInterface: QueryInterface): Promise<void> => {
+	up: async (queryInterface: QueryInterface) => {
 		await queryInterface.createTable('RssFeedItems', {
 			id: {
 				type: DataTypes.UUID,
@@ -36,7 +36,7 @@ module.exports = {
 		});
 	},
 
-	down: async (queryInterface: QueryInterface): Promise<void> => {
+	down: async (queryInterface: QueryInterface) => {
 		await queryInterface.dropTable('RssFeedItems');
 	},
 };
