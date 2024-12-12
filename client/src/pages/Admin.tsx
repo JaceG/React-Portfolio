@@ -12,7 +12,8 @@ interface Book {
 	description: string;
 }
 
-const API_URL = import.meta.env.VITE_API_URL;
+// Update to use production API URL
+const API_URL = 'https://react-portfolio-7z0l.onrender.com/api';
 
 const Admin: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
@@ -70,57 +71,78 @@ const Admin: React.FC = () => {
 	};
 
 	if (loading) {
-		return <div>Loading...</div>;
-	}
-
-	if (error) {
-		return <div>Error: {error}</div>;
+		return (
+			<section className='resume-container'>
+				<div className='loading'>Loading...</div>
+			</section>
+		);
 	}
 
 	if (!authenticated) {
 		return (
-			<div>
-				<h2>Admin Login</h2>
-				<form onSubmit={handleLogin}>
-					<input
-						type='text'
-						placeholder='Username'
-						value={username}
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-					<input
-						type='password'
-						placeholder='Password'
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<button type='submit'>Login</button>
+			<section className='resume-container'>
+				<Title title='Admin Login' />
+				<form onSubmit={handleLogin} className='contact-form'>
+					<div className='form-group'>
+						<label htmlFor='username' className='form-label'>
+							Username:
+						</label>
+						<input
+							type='text'
+							id='username'
+							className='form-input'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					</div>
+					<div className='form-group'>
+						<label htmlFor='password' className='form-label'>
+							Password:
+						</label>
+						<input
+							type='password'
+							id='password'
+							className='form-input'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<button type='submit' className='submit-button'>
+						Login
+					</button>
 				</form>
-			</div>
+			</section>
 		);
 	}
 
 	return (
-		<div>
+		<section className='resume-container'>
 			<Title title='Admin - Edit Book Images' />
-			{books.map((book) => (
-				<div key={book.id}>
-					<h3>{book.title}</h3>
-					<img
-						src={book.image_url}
-						alt={book.title}
-						style={{ width: '100px' }}
-					/>
-					<input
-						type='text'
-						defaultValue={book.image_url}
-						onBlur={(e) =>
-							handleUpdateImage(book.id, e.target.value)
-						}
-					/>
-				</div>
-			))}
-		</div>
+			{error && <div className='error-message'>{error}</div>}
+			<div className='books-grid'>
+				{books.map((book) => (
+					<div key={book.id} className='book-item'>
+						<h3 className='book-title'>{book.title}</h3>
+						<img
+							src={
+								book.image_url ||
+								'https://via.placeholder.com/200x300'
+							}
+							alt={book.title}
+							className='book-image'
+						/>
+						<input
+							type='text'
+							className='form-input'
+							defaultValue={book.image_url}
+							onBlur={(e) =>
+								handleUpdateImage(book.id, e.target.value)
+							}
+						/>
+					</div>
+				))}
+			</div>
+		</section>
 	);
 };
 
