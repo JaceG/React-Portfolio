@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import Title from '../components/Title';
 import images from '../constants/images';
 import '../style.css';
 
-function About() {
+const About: React.FC = () => {
 	return (
 		<section className='resume-container'>
 			<Title title='About Me' />
@@ -69,6 +69,6 @@ function About() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default About;

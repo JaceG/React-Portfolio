@@ -3,8 +3,15 @@ import Project from '../components/Project';
 import Title from '../components/Title';
 import images from '../constants/images';
 
-function Portfolio() {
-	const projects = [
+interface ProjectData {
+	title: string;
+	img: string;
+	links: { name: string; link: string }[];
+	description?: string;
+}
+
+const Portfolio: React.FC = () => {
+	const projects: ProjectData[] = [
 		{
 			title: 'CSS Cheatsheet',
 			img: images.CssCheatsheet,
@@ -126,7 +133,7 @@ function Portfolio() {
 		<section className='resume-container'>
 			<div className='portfolio-container'>
 				<Title title='Portfolio' />
-				<div className='row gx-5'>
+				<div className='projects-grid'>
 					{projects.map((project, index) => (
 						<Project key={index} {...project} />
 					))}
@@ -134,6 +141,6 @@ function Portfolio() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default Portfolio;

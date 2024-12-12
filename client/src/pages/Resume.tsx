@@ -1,6 +1,5 @@
-import React from 'react';
 import Title from '../components/Title';
-import { Link } from 'react-router-dom'; // Import Link for navigation
+import { Link } from 'react-router-dom';
 import '../style.css';
 import images from '../constants/images';
 

@@ -6,35 +6,25 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import '../style.css';
 
-function Header() {
-	const [show, setShow] = useState(false);
+const Header: React.FC = () => {
+	const [show, setShow] = useState<boolean>(false);
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
 
 	return (
 		<header>
-			<Navbar key={'sm'} expand={'sm'} className='bg-transparent mb-3'>
+			<Navbar expand='sm' className='bg-transparent mb-3'>
 				<Container fluid>
 					<Navbar.Brand className='text-white'>
 						Jace Galloway
 					</Navbar.Brand>
-					<Navbar.Toggle
-						aria-controls={`offcanvasNavbar-expand-sm`}
-						onClick={handleShow}
-					/>
+
 					<Navbar.Offcanvas
-						id={`offcanvasNavbar-expand-sm`}
-						aria-labelledby={`offcanvasNavbarLabel-expand-sm`}
+						id='offcanvasNavbar-sm'
+						aria-labelledby='offcanvasNavbarLabel-sm'
 						placement='end'
 						show={show}
 						onHide={handleClose}>
-						<Offcanvas.Header closeButton>
-							<Offcanvas.Title
-								id={`offcanvasNavbarLabel-expand-sm`}>
-								My Portfolio
-							</Offcanvas.Title>
-						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='justify-content-end flex-grow-1 pe-3'>
 								<Nav.Link
@@ -79,6 +69,6 @@ function Header() {
 			</Navbar>
 		</header>
 	);
-}
+};
 
 export default Header;

@@ -1,0 +1,23 @@
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+
+# IDE/Editor folders
+.vscode/
+.idea/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+

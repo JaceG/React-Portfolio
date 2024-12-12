@@ -1,26 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import Title from '../components/Title';
 
-const initialData = {
+interface FormData {
+	name: string;
+	email: string;
+	message: string;
+}
+
+interface FormErrors {
+	name?: string;
+	email?: string;
+	message?: string;
+}
+
+const initialData: FormData = {
 	name: '',
 	email: '',
 	message: '',
 };
 
-function Contact() {
-	const [formData, setFormData] = useState({
-		...initialData,
-	});
-	const [errors, setErrors] = useState({});
+const Contact: React.FC = () => {
+	const [formData, setFormData] = useState<FormData>(initialData);
+	const [errors, setErrors] = useState<FormErrors>({});
 
-	const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+	const validateEmail = (email: string): boolean =>
+		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-	const handleChange = (e) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-		handleErrors(e.target.name, e.target.value);
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) => {
+		const { name, value } = e.target;
+		setFormData((prevData) => ({ ...prevData, [name]: value }));
+		handleErrors(name, value);
 	};
 
-	const handleErrors = (name, value) => {
+	const handleErrors = (name: string, value: string): boolean => {
 		let isValid = true;
 		if (!value) {
 			setErrors((prev) => ({
@@ -32,21 +46,19 @@ function Contact() {
 			setErrors((prev) => ({ ...prev, [name]: 'Invalid email' }));
 			isValid = false;
 		} else {
-			setErrors((prev) => ({ ...prev, [name]: '' }));
-			isValid = true;
+			setErrors((prev) => ({ ...prev, [name]: undefined }));
 		}
 		return isValid;
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		const names = Object.keys(formData);
-		const formErrors = names.filter(
-			(name) => !handleErrors(name, formData[name])
+		const formErrors = Object.keys(formData).filter(
+			(key) => !handleErrors(key, formData[key as keyof FormData])
 		);
 		if (formErrors.length === 0) {
 			alert('Thanks for reaching out. I will get back to you soon.');
-			setFormData({ ...initialData });
+			setFormData(initialData);
 		}
 	};
 
@@ -54,61 +66,63 @@ function Contact() {
 		<section className='resume-container'>
 			<div className='contact-container'>
 				<Title title='Contact' />
-				<form onSubmit={handleSubmit}>
-					<div className='mb-3'>
+				<form onSubmit={handleSubmit} className='contact-form'>
+					<div className='form-group'>
 						<label htmlFor='name' className='form-label'>
 							Name:
 						</label>
 						<input
 							type='text'
 							name='name'
-							className='form-control'
+							id='name'
+							className='form-input'
 							value={formData.name}
 							onChange={handleChange}
-							id='name'
 						/>
 						{errors.name && (
-							<div className='text-danger'>{errors.name}</div>
+							<div className='error-message'>{errors.name}</div>
 						)}
 					</div>
-					<div className='mb-3'>
+					<div className='form-group'>
 						<label htmlFor='email' className='form-label'>
 							Email:
 						</label>
 						<input
 							type='email'
 							name='email'
-							className='form-control'
+							id='email'
+							className='form-input'
 							value={formData.email}
 							onChange={handleChange}
-							id='email'
 						/>
 						{errors.email && (
-							<div className='text-danger'>{errors.email}</div>
+							<div className='error-message'>{errors.email}</div>
 						)}
 					</div>
-					<div className='mb-3'>
+					<div className='form-group'>
 						<label htmlFor='message' className='form-label'>
 							Message:
 						</label>
 						<textarea
 							name='message'
-							className='form-control'
+							id='message'
+							className='form-textarea'
 							value={formData.message}
 							onChange={handleChange}
-							id='message'
-							rows='4'
+							rows={4}
 						/>
 						{errors.message && (
-							<div className='text-danger'>{errors.message}</div>
+							<div className='error-message'>
+								{errors.message}
+							</div>
 						)}
 					</div>
-					<button type='submit' className='btn btn-primary'>
+					<button type='submit' className='submit-button'>
 						Send Message
 					</button>
 				</form>
-				<div className='mt-4'>
-					<h5>Contact Information</h5>
+				<div className='contact-info'>
+					<h3>Contact Information</h3>
 					<p>
 						Email:{' '}
 						<a href='mailto:jace.galloway@gmail.com'>
@@ -122,6 +136,6 @@ function Contact() {
 			</div>
 		</section>
 	);
-}
+};
 
 export default Contact;

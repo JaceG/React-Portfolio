@@ -1,8 +1,13 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 
-const Footer = () => {
-	const socialLinks = [
+interface SocialLink {
+	url: string;
+	label: string;
+}
+
+const Footer: React.FC = () => {
+	const socialLinks: SocialLink[] = [
 		{ url: 'https://github.com/', label: 'GitHub' },
 		{ url: 'https://linkedin.com/', label: 'LinkedIn' },
 		{ url: 'https://stackoverflow.com/', label: 'StackOverflow' },
