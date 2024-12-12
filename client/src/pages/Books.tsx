@@ -12,6 +12,8 @@ interface Book {
 	description: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Books: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -21,15 +23,12 @@ const Books: React.FC = () => {
 		const fetchBooks = async () => {
 			try {
 				setLoading(true);
-				const response = await axios.get(
-					'http://localhost:3001/api/books',
-					{
-						headers: {
-							'Content-Type': 'application/json',
-						},
-						withCredentials: true,
-					}
-				);
+				const response = await axios.get(`${API_URL}/books`, {
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					withCredentials: true,
+				});
 
 				setBooks(response.data);
 				setError(null);

@@ -15,9 +15,25 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Configure CORS
+const allowedOrigins = [
+	'http://localhost:5173',
+	'http://127.0.0.1:5173',
+	'https://react-portfolio-7z0l.onrender.com',
+];
+
 app.use(
 	cors({
-		origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+		origin: function (origin, callback) {
+			// allow requests with no origin (like mobile apps or curl requests)
+			if (!origin) return callback(null, true);
+
+			if (allowedOrigins.indexOf(origin) === -1) {
+				const msg =
+					'The CORS policy for this site does not allow access from the specified Origin.';
+				return callback(new Error(msg), false);
+			}
+			return callback(null, true);
+		},
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
@@ -56,9 +72,7 @@ const umzug = new Umzug({
 
 // API Routes
 app.get('/api/books', async (req, res) => {
-	res.header('Access-Control-Allow-Origin', 'http://localhost:5173');
-	res.header('Access-Control-Allow-Credentials', 'true');
-
+	// Remove the static CORS headers and let the cors middleware handle it
 	try {
 		const feedItems = await getFeed();
 		res.json(feedItems);

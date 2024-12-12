@@ -12,6 +12,8 @@ interface Book {
 	description: string;
 }
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Admin: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
 	const [loading, setLoading] = useState<boolean>(true);
@@ -27,7 +29,7 @@ const Admin: React.FC = () => {
 	const fetchBooks = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get('http://localhost:3001/api/books');
+			const response = await axios.get(`${API_URL}/books`);
 			setBooks(response.data);
 			setError(null);
 		} catch (err) {
@@ -46,7 +48,7 @@ const Admin: React.FC = () => {
 	const handleUpdateImage = async (id: string, newImageUrl: string) => {
 		try {
 			const response = await axios.put(
-				`http://localhost:3001/api/admin/books/${id}`,
+				`${API_URL}/admin/books/${id}`,
 				{ image_url: newImageUrl },
 				{
 					auth: {
