@@ -19,19 +19,12 @@ const allowedOrigins = [
 	'http://localhost:5173',
 	'http://127.0.0.1:5173',
 	'https://react-portfolio-7z0l.onrender.com',
+	'https://react-portfolio-7z0l.onrender.com/',
 ];
 
 app.use(
 	cors({
-		origin: function (origin, callback) {
-			if (!origin) return callback(null, true);
-			if (allowedOrigins.indexOf(origin) === -1) {
-				const msg =
-					'The CORS policy for this site does not allow access from the specified Origin.';
-				return callback(new Error(msg), false);
-			}
-			return callback(null, true);
-		},
+		origin: allowedOrigins,
 		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
@@ -43,7 +36,7 @@ app.use(
 app.use((req, res, next) => {
 	res.setHeader(
 		'Content-Security-Policy',
-		"default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
+		"default-src 'self'; connect-src 'self' https://react-portfolio-7z0l.onrender.com https://react-portfolio-7z0l.onrender.com/api/*; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
 	);
 	next();
 });

@@ -12,7 +12,8 @@ interface Book {
 	description: string;
 }
 
-const API_URL = import.meta.env.VITE_API_URL;
+// Update API URL to use the deployed server URL
+const API_URL = 'https://react-portfolio-7z0l.onrender.com/api';
 
 const Books: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
@@ -27,7 +28,6 @@ const Books: React.FC = () => {
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					withCredentials: true,
 				});
 
 				setBooks(response.data);
