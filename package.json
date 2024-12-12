@@ -1,10 +1,10 @@
 {
   "name": "my-portfolio",
   "version": "1.0.0",
-  "type": "module",
   "description": "My Portfolio Website",
   "main": "index.js",
   "scripts": {
+    "start": "cd server && npm start",
     "start:dev": "concurrently \"npm run dev --prefix client\" \"npm run dev --prefix server\"",
     "install": "npm install --prefix client && npm install --prefix server",
     "build": "npm run build --prefix client && npm run build --prefix server"
