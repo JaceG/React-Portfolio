@@ -64,7 +64,16 @@ const Contact: React.FC = () => {
 		if (formErrors.length === 0) {
 			setIsSubmitting(true);
 			try {
-				await axios.post(`${API_URL}/contact`, formData);
+				// Log the request URL and data for debugging
+				console.log('Sending request to:', `${API_URL}/contact`);
+				console.log('Form data:', formData);
+
+				const response = await axios.post(
+					`${API_URL}/contact`,
+					formData
+				);
+				console.log('Server response:', response);
+
 				setSubmitMessage(
 					'Thank you for your message. I will get back to you soon!'
 				);

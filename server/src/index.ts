@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { Umzug, SequelizeStorage } from 'umzug';
 import { getFeed, fetchRssFeed, updateBookImage } from './services/rssFeed';
-import RssFeedItem from './models/RssFeedItem';
 import sequelize from './config/database';
 import path from 'path';
 import basicAuth from 'express-basic-auth';
@@ -124,10 +123,16 @@ app.post('/api/contact', async (req, res) => {
 			message,
 		});
 
+		// During pending approval, we need to send to an email with the same domain
+		const toEmail =
+			process.env.NODE_ENV === 'production'
+				? 'jace@talkwithjace.com' // Must use same domain during pending approval
+				: process.env.POSTMARK_TO_EMAIL;
+
 		// Send email using Postmark
 		const response = await client.sendEmail({
 			From: process.env.POSTMARK_FROM_EMAIL || '',
-			To: process.env.POSTMARK_TO_EMAIL || '',
+			To: toEmail,
 			Subject: 'New Contact Form Submission',
 			TextBody: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
 			HtmlBody: `<p><strong>Name:</strong> ${name}</p>
