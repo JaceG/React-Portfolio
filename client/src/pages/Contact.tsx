@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import axios from 'axios';
 import Title from '../components/Title';
 
 interface FormData {
@@ -19,9 +20,13 @@ const initialData: FormData = {
 	message: '',
 };
 
+const API_URL = 'https://react-portfolio-7z0l.onrender.com/api';
+
 const Contact: React.FC = () => {
 	const [formData, setFormData] = useState<FormData>(initialData);
 	const [errors, setErrors] = useState<FormErrors>({});
+	const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+	const [submitMessage, setSubmitMessage] = useState<string | null>(null);
 
 	const validateEmail = (email: string): boolean =>
 		/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -51,14 +56,27 @@ const Contact: React.FC = () => {
 		return isValid;
 	};
 
-	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formErrors = Object.keys(formData).filter(
 			(key) => !handleErrors(key, formData[key as keyof FormData])
 		);
 		if (formErrors.length === 0) {
-			alert('Thanks for reaching out. I will get back to you soon.');
-			setFormData(initialData);
+			setIsSubmitting(true);
+			try {
+				await axios.post(`${API_URL}/contact`, formData);
+				setSubmitMessage(
+					'Thank you for your message. I will get back to you soon!'
+				);
+				setFormData(initialData);
+			} catch (error) {
+				console.error('Error sending message:', error);
+				setSubmitMessage(
+					'There was an error sending your message. Please try again later.'
+				);
+			} finally {
+				setIsSubmitting(false);
+			}
 		}
 	};
 
@@ -66,6 +84,16 @@ const Contact: React.FC = () => {
 		<section className='resume-container'>
 			<div className='contact-container'>
 				<Title title='Contact' />
+				{submitMessage && (
+					<div
+						className={`submit-message ${
+							submitMessage.includes('error')
+								? 'error'
+								: 'success'
+						}`}>
+						{submitMessage}
+					</div>
+				)}
 				<form onSubmit={handleSubmit} className='contact-form'>
 					<div className='form-group'>
 						<label htmlFor='name' className='form-label'>
@@ -117,8 +145,11 @@ const Contact: React.FC = () => {
 							</div>
 						)}
 					</div>
-					<button type='submit' className='submit-button'>
-						Send Message
+					<button
+						type='submit'
+						className='submit-button'
+						disabled={isSubmitting}>
+						{isSubmitting ? 'Sending...' : 'Send Message'}
 					</button>
 				</form>
 				<div className='contact-info'>
