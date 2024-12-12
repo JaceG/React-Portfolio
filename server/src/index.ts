@@ -3,10 +3,11 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { Umzug, SequelizeStorage } from 'umzug';
-import { getFeed, fetchRssFeed } from './services/rssFeed';
+import { getFeed, fetchRssFeed, updateBookImage } from './services/rssFeed';
 import RssFeedItem from './models/RssFeedItem';
 import sequelize from './config/database';
 import path from 'path';
+import basicAuth from 'express-basic-auth';
 
 dotenv.config();
 
@@ -25,6 +26,12 @@ app.use(
 );
 
 app.use(express.json());
+
+// Basic Auth Middleware
+const adminAuth = basicAuth({
+	users: { admin: process.env.ADMIN_PASSWORD || 'changeme' },
+	challenge: true,
+});
 
 // Configure Umzug for migrations
 const umzug = new Umzug({
@@ -58,6 +65,24 @@ app.get('/api/books', async (req, res) => {
 	} catch (error) {
 		console.error('Error fetching books:', error);
 		res.status(500).json({ error: 'Failed to fetch books' });
+	}
+});
+
+// Admin route to update book image
+app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
+	const { id } = req.params;
+	const { image_url } = req.body;
+
+	try {
+		const updatedBook = await updateBookImage(id, image_url);
+		if (updatedBook) {
+			res.json(updatedBook);
+		} else {
+			res.status(404).json({ error: 'Book not found' });
+		}
+	} catch (error) {
+		console.error('Error updating book image:', error);
+		res.status(500).json({ error: 'Failed to update book image' });
 	}
 });
 

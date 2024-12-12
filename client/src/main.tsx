@@ -8,6 +8,7 @@ import Books from './pages/Books';
 import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import Resume from './pages/Resume';
+import Admin from './pages/Admin';
 import './style.css';
 
 const rootElement = document.getElementById('root');
@@ -26,6 +27,7 @@ root.render(
 						<Route path='/contact' element={<Contact />} />
 						<Route path='/portfolio' element={<Portfolio />} />
 						<Route path='/resume' element={<Resume />} />
+						<Route path='/admin' element={<Admin />} />
 					</Routes>
 				</main>
 				<Footer />

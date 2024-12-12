@@ -77,6 +77,21 @@ export async function getFeed() {
 	}
 }
 
+export async function updateBookImage(id: string, image_url: string) {
+	try {
+		const book = await RssFeedItem.findByPk(id);
+		if (book) {
+			book.image_url = image_url;
+			await book.save();
+			return book;
+		}
+		return null;
+	} catch (error) {
+		console.error('Error updating book image:', error);
+		throw error;
+	}
+}
+
 function extractImageUrl(content: string): string | null {
 	const match = content.match(/<img.*?src="(.*?)"/);
 	return match ? match[1] : null;
