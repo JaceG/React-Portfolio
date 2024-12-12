@@ -39,7 +39,19 @@ app.use(
 	})
 );
 
+// Security headers middleware
+app.use((req, res, next) => {
+	res.setHeader(
+		'Content-Security-Policy',
+		"default-src 'self'; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
+	);
+	next();
+});
+
 app.use(express.json());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../../client/dist')));
 
 // Basic Auth Middleware
 const adminAuth = basicAuth({
@@ -95,6 +107,11 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 		console.error('Error updating book image:', error);
 		res.status(500).json({ error: 'Failed to update book image' });
 	}
+});
+
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
 });
 
 async function startServer() {
