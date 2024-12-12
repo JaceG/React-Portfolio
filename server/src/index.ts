@@ -8,8 +8,16 @@ import RssFeedItem from './models/RssFeedItem';
 import sequelize from './config/database';
 import path from 'path';
 import basicAuth from 'express-basic-auth';
+import * as postmark from 'postmark';
 
 dotenv.config();
+
+// Log Postmark configuration (without exposing sensitive data)
+console.log('Postmark configuration loaded:', {
+	hasApiKey: !!process.env.POSTMARK_API_KEY,
+	fromEmail: process.env.POSTMARK_FROM_EMAIL,
+	toEmail: process.env.POSTMARK_TO_EMAIL,
+});
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -73,6 +81,9 @@ const umzug = new Umzug({
 	logger: console,
 });
 
+// Create Postmark client
+const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY || '');
+
 // API Routes
 app.get('/api/books', async (req, res) => {
 	try {
@@ -99,6 +110,39 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	} catch (error) {
 		console.error('Error updating book image:', error);
 		res.status(500).json({ error: 'Failed to update book image' });
+	}
+});
+
+// Contact form email sending route
+app.post('/api/contact', async (req, res) => {
+	const { name, email, message } = req.body;
+
+	try {
+		console.log('Received contact form submission:', {
+			name,
+			email,
+			message,
+		});
+
+		// Send email using Postmark
+		const response = await client.sendEmail({
+			From: process.env.POSTMARK_FROM_EMAIL || '',
+			To: process.env.POSTMARK_TO_EMAIL || '',
+			Subject: 'New Contact Form Submission',
+			TextBody: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+			HtmlBody: `<p><strong>Name:</strong> ${name}</p>
+                 <p><strong>Email:</strong> ${email}</p>
+                 <p><strong>Message:</strong> ${message}</p>`,
+		});
+
+		console.log('Postmark response:', response);
+		res.status(200).json({ message: 'Email sent successfully' });
+	} catch (error) {
+		console.error('Error sending email:', error);
+		res.status(500).json({
+			error: 'Failed to send email',
+			details: error instanceof Error ? error.message : 'Unknown error',
+		});
 	}
 });
 
