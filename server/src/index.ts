@@ -123,15 +123,13 @@ app.post('/api/contact', async (req, res) => {
 			message,
 		});
 
-		// During pending approval, we need to send to an email with the same domain
-		const toEmail =
-			process.env.NODE_ENV === 'production'
-				? 'jace@talkwithjace.com' // Must use same domain during pending approval
-				: process.env.POSTMARK_TO_EMAIL;
+		// Use the verified domain email addresses
+		const fromEmail = 'jace@talkwithjace.com'; // or any verified email on your domain
+		const toEmail = 'jace@talkwithjace.com'; // or any other email on your domain
 
 		// Send email using Postmark
 		const response = await client.sendEmail({
-			From: process.env.POSTMARK_FROM_EMAIL || '',
+			From: fromEmail,
 			To: toEmail,
 			Subject: 'New Contact Form Submission',
 			TextBody: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
