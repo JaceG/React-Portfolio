@@ -2,6 +2,9 @@
   "name": "my-portfolio",
   "version": "1.0.0",
   "description": "My Portfolio Website",
+  "engines": {
+    "node": ">=18.18.0"
+  },
   "main": "index.js",
   "scripts": {
     "start": "cd server && npm run start",
@@ -21,3 +24,4 @@
     "react-beautiful-dnd": "^13.1.1"
   }
 }
+

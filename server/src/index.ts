@@ -8,7 +8,6 @@ import {
 	updateBookImage,
 	fetchNewBooks,
 	toggleBookHidden,
-	fetchRssFeed,
 	updateBookOrder,
 	refetchAllBooks,
 } from './services/rssFeed';
@@ -67,7 +66,7 @@ const adminAuth = basicAuth({
 
 const umzug = new Umzug({
 	migrations: {
-		glob: 'src/migrations/*.ts',
+		glob: 'src/migrations/*.js',
 		resolve: ({ name, path: migrationPath, context }) => {
 			if (typeof migrationPath !== 'string') {
 				throw new Error(`Invalid migration path: ${migrationPath}`);
@@ -131,7 +130,6 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	const { id } = req.params;
 	const { image_url } = req.body;
 
-	// Validate UUID format
 	const uuidRegex =
 		/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 	if (!uuidRegex.test(id)) {
@@ -154,7 +152,6 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 app.put('/api/admin/books/:id/toggle-hidden', adminAuth, async (req, res) => {
 	const { id } = req.params;
 
-	// Validate UUID format
 	const uuidRegex =
 		/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 	if (!uuidRegex.test(id)) {
@@ -256,9 +253,6 @@ async function startServer() {
 		});
 	} catch (error) {
 		console.error('Unable to start server:', error);
-		if (error instanceof Error) {
-			console.error(error.stack);
-		}
 		process.exit(1);
 	}
 }
