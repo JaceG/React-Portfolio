@@ -4,8 +4,12 @@
     "description": "",
     "main": "dist/index.js",
     "type": "commonjs",
+    "engines": {
+      "node": ">=18.18.0"
+    },
     "scripts": {
-      "start": "ts-node src/index.ts",
+      "start": "node dist/index.js",
+      "prestart": "npm run build",
       "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
       "build": "tsc",
       "clean": "rm -rf dist",

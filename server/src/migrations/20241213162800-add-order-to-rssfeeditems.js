@@ -1,10 +1,8 @@
-import { QueryInterface, DataTypes } from 'sequelize';
+'use strict';
 
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-	async up(
-		queryInterface: QueryInterface,
-		Sequelize: { INTEGER: typeof DataTypes.INTEGER }
-	) {
+	async up(queryInterface, Sequelize) {
 		const tableInfo = await queryInterface.describeTable('RssFeedItems');
 		if (!tableInfo.order) {
 			await queryInterface.addColumn('RssFeedItems', 'order', {
@@ -26,7 +24,7 @@ module.exports = {
 		}
 	},
 
-	async down(queryInterface: QueryInterface) {
+	async down(queryInterface, Sequelize) {
 		const tableInfo = await queryInterface.describeTable('RssFeedItems');
 		if (tableInfo.order) {
 			await queryInterface.removeColumn('RssFeedItems', 'order');
