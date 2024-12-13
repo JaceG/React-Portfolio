@@ -3,7 +3,12 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import { Umzug, SequelizeStorage } from 'umzug';
-import { getFeed, fetchRssFeed, updateBookImage } from './services/rssFeed';
+import {
+	getFeed,
+	fetchRssFeed,
+	updateBookImage,
+	fetchNewBooks,
+} from './services/rssFeed';
 import sequelize from './config/database';
 import path from 'path';
 import basicAuth from 'express-basic-auth';
@@ -114,6 +119,17 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	}
 });
 
+// New endpoint to fetch new books
+app.post('/api/admin/fetch-new-books', adminAuth, async (req, res) => {
+	try {
+		const newBooks = await fetchNewBooks();
+		res.json({ message: `${newBooks.length} new books added`, newBooks });
+	} catch (error) {
+		console.error('Error fetching new books:', error);
+		res.status(500).json({ error: 'Failed to fetch new books' });
+	}
+});
+
 // Contact form email sending route
 app.post('/api/contact', async (req, res) => {
 	const { name, email, message } = req.body;
@@ -168,9 +184,6 @@ async function startServer() {
 		console.log('Syncing models...');
 		await sequelize.sync({ alter: true });
 		console.log('Models synchronized successfully.');
-
-		await fetchRssFeed();
-		setInterval(fetchRssFeed, 6 * 60 * 60 * 1000);
 
 		app.listen(PORT, () => {
 			console.log(`Server is running on port ${PORT}`);

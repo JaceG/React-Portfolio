@@ -104,3 +104,41 @@ function extractDescription(content: string): string | null {
 	}
 	return null;
 }
+
+export async function fetchNewBooks() {
+	try {
+		const feed = await parser.parseURL(process.env.RSS_FEED_URL || '');
+		const newBooks = [];
+
+		for (const item of feed.items) {
+			const existingBook = await RssFeedItem.findOne({
+				where: { link: item.link },
+			});
+			if (!existingBook) {
+				const imageUrl = extractImageUrl(item.content);
+				const description = extractDescription(item.content);
+				const authorMatch = item.content.match(
+					/author:\s?(.+?)\<br\/\>/
+				);
+				const author = authorMatch ? authorMatch[1] : '';
+
+				const newBook = await RssFeedItem.create({
+					title: item.title || '',
+					description: description || item.contentSnippet || '',
+					link: item.link || '',
+					pubDate: new Date(item.pubDate || Date.now()),
+					image_url: imageUrl || '',
+					author: author || '',
+				});
+
+				newBooks.push(newBook);
+			}
+		}
+
+		console.log(`${newBooks.length} new books added to the database`);
+		return newBooks;
+	} catch (error) {
+		console.error('Error fetching new books:', error);
+		throw error;
+	}
+}

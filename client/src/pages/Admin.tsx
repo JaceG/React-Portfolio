@@ -22,6 +22,8 @@ const Admin: React.FC = () => {
 	const [username, setUsername] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 	const [authenticated, setAuthenticated] = useState<boolean>(false);
+	const [fetchingNewBooks, setFetchingNewBooks] = useState<boolean>(false);
+	const [newBooksMessage, setNewBooksMessage] = useState<string | null>(null);
 
 	useEffect(() => {
 		fetchBooks();
@@ -67,6 +69,31 @@ const Admin: React.FC = () => {
 		} catch (err) {
 			console.error('Error updating book image:', err);
 			setError('Failed to update book image. Please try again.');
+		}
+	};
+
+	const handleFetchNewBooks = async () => {
+		try {
+			setFetchingNewBooks(true);
+			setNewBooksMessage(null);
+			const response = await axios.post(
+				`${API_URL}/admin/fetch-new-books`,
+				{},
+				{
+					auth: {
+						username,
+						password,
+					},
+				}
+			);
+			setNewBooksMessage(response.data.message);
+			// Refresh the books list
+			fetchBooks();
+		} catch (err) {
+			console.error('Error fetching new books:', err);
+			setNewBooksMessage('Failed to fetch new books. Please try again.');
+		} finally {
+			setFetchingNewBooks(false);
 		}
 	};
 
@@ -119,6 +146,17 @@ const Admin: React.FC = () => {
 		<section className='resume-container'>
 			<Title title='Admin - Edit Book Images' />
 			{error && <div className='error-message'>{error}</div>}
+			<div className='mb-4'>
+				<button
+					onClick={handleFetchNewBooks}
+					disabled={fetchingNewBooks}
+					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+					{fetchingNewBooks ? 'Fetching...' : 'Fetch New Books'}
+				</button>
+				{newBooksMessage && (
+					<p className='mt-2 text-green-600'>{newBooksMessage}</p>
+				)}
+			</div>
 			<div className='books-grid'>
 				{books.map((book) => (
 					<div key={book.id} className='book-item'>
