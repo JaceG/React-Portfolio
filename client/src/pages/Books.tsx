@@ -12,7 +12,6 @@ interface Book {
 	description: string;
 }
 
-// Dynamic API URL based on the current hostname
 const API_URL =
 	window.location.hostname === 'localhost' ||
 	window.location.hostname === '127.0.0.1'
@@ -79,10 +78,11 @@ const Books: React.FC = () => {
 							<img
 								src={
 									book.image_url ||
-									'https://via.placeholder.com/200x300'
+									'https://via.placeholder.com/600x900'
 								}
 								alt={book.title}
 								className='book-image'
+								loading='lazy'
 							/>
 							<h3 className='book-title'>{book.title}</h3>
 							<p className='book-author'>By {book.author}</p>

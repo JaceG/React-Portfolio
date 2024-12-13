@@ -371,8 +371,6 @@ a.active {
   transition: background-color 0.2s;
 }
 
-
-
 /* Media Queries */
 @media (min-width: 768px) {
   .text-md-white {
@@ -543,8 +541,8 @@ a.active {
 /* Books Page Styles */
 .books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
   padding: 20px 0;
 }
 
@@ -553,7 +551,7 @@ a.active {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 15px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -565,39 +563,109 @@ a.active {
 }
 
 .book-image {
-  width: 150px;
-  height: 225px;
-  object-fit: contain;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: cover;
   border-radius: 4px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .book-title {
-  font-size: 1em;
+  font-size: 1.2em;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   color: var(--primary-color);
 }
 
 .book-author {
-  font-size: 0.9em;
+  font-size: 1em;
   color: var(--text-color);
   margin-bottom: 5px;
 }
 
 .book-date {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: var(--text-color);
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .book-link {
   color: var(--link-color);
   text-decoration: none;
   font-size: 0.9em;
+  padding: 5px 10px;
+  border: 1px solid var(--link-color);
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .book-link:hover {
-  text-decoration: underline;
+  background-color: var(--link-color);
+  color: white;
+}
+
+/* Admin Page Styles */
+.admin-books-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.admin-book-item {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-book-item:hover {
+  background-color: #f0f0f0;
+}
+
+.admin-book-item.dragging {
+  background-color: #e8e8e8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drag-handle {
+  cursor: grab;
+  margin-right: 15px;
+  color: #888;
+}
+
+.drag-handle:hover {
+  color: #555;
+}
+
+.book-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.admin-book-item .book-image {
+  width: 100px;
+  height: auto;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.admin-book-item .form-input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.admin-book-item .form-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 

@@ -10,6 +10,7 @@ class RssFeedItem extends Model {
 	public image_url!: string | null;
 	public author!: string | null;
 	public hidden!: boolean;
+	public order!: number;
 	public readonly createdAt!: Date;
 	public readonly updatedAt!: Date;
 }
@@ -50,6 +51,11 @@ RssFeedItem.init(
 			type: DataTypes.BOOLEAN,
 			allowNull: false,
 			defaultValue: false,
+		},
+		order: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
 		},
 	},
 	{

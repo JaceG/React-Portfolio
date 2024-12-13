@@ -5,15 +5,18 @@ import { Sequelize } from 'sequelize';
 import { Umzug, SequelizeStorage } from 'umzug';
 import {
 	getFeed,
-	fetchRssFeed,
 	updateBookImage,
 	fetchNewBooks,
 	toggleBookHidden,
+	fetchRssFeed,
+	updateBookOrder,
+	refetchAllBooks,
 } from './services/rssFeed';
 import sequelize from './config/database';
 import path from 'path';
 import basicAuth from 'express-basic-auth';
 import * as postmark from 'postmark';
+import RssFeedItem from './models/RssFeedItem';
 
 dotenv.config();
 
@@ -94,9 +97,46 @@ app.get('/api/books', async (req, res) => {
 	}
 });
 
+app.put('/api/admin/books/reorder', adminAuth, async (req, res) => {
+	const { books } = req.body;
+
+	if (!Array.isArray(books)) {
+		return res.status(400).json({
+			error: 'Invalid request format. Expected an array of books.',
+		});
+	}
+
+	try {
+		const updatedBooks = await updateBookOrder(books);
+		return res.status(200).json({
+			message: 'Books reordered successfully',
+			books: updatedBooks,
+		});
+	} catch (error) {
+		console.error('Error reordering books:', error);
+		if (
+			error instanceof Error &&
+			error.message.includes('Invalid book data')
+		) {
+			return res.status(400).json({ error: error.message });
+		}
+		return res.status(500).json({
+			error: 'Failed to reorder books',
+			details: error instanceof Error ? error.message : 'Unknown error',
+		});
+	}
+});
+
 app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	const { id } = req.params;
 	const { image_url } = req.body;
+
+	// Validate UUID format
+	const uuidRegex =
+		/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+	if (!uuidRegex.test(id)) {
+		return res.status(400).json({ error: 'Invalid book ID format' });
+	}
 
 	try {
 		const updatedBook = await updateBookImage(id, image_url);
@@ -114,11 +154,14 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 app.put('/api/admin/books/:id/toggle-hidden', adminAuth, async (req, res) => {
 	const { id } = req.params;
 
-	try {
-		if (!id) {
-			return res.status(400).json({ error: 'Book ID is required' });
-		}
+	// Validate UUID format
+	const uuidRegex =
+		/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+	if (!uuidRegex.test(id)) {
+		return res.status(400).json({ error: 'Invalid book ID format' });
+	}
 
+	try {
 		const updatedBook = await toggleBookHidden(id);
 		if (!updatedBook) {
 			return res.status(404).json({ error: 'Book not found' });
@@ -141,6 +184,19 @@ app.post('/api/admin/fetch-new-books', adminAuth, async (req, res) => {
 	} catch (error) {
 		console.error('Error fetching new books:', error);
 		res.status(500).json({ error: 'Failed to fetch new books' });
+	}
+});
+
+app.post('/api/admin/refetch-all-books', adminAuth, async (req, res) => {
+	try {
+		const updatedBooks = await refetchAllBooks();
+		res.json({
+			message: `${updatedBooks.length} books updated or added`,
+			updatedBooks,
+		});
+	} catch (err) {
+		console.error('Error refetching all books:', err);
+		res.status(500).json({ error: 'Failed to refetch all books' });
 	}
 });
 
