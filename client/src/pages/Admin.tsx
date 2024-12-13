@@ -10,10 +10,14 @@ interface Book {
 	link: string;
 	image_url: string;
 	description: string;
+	hidden: boolean;
 }
 
-// Update to use production API URL
-const API_URL = 'https://react-portfolio-7z0l.onrender.com/api';
+const API_URL =
+	window.location.hostname === 'localhost' ||
+	window.location.hostname === '127.0.0.1'
+		? 'http://localhost:3001/api'
+		: 'https://react-portfolio-7z0l.onrender.com/api';
 
 const Admin: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
@@ -32,7 +36,9 @@ const Admin: React.FC = () => {
 	const fetchBooks = async () => {
 		try {
 			setLoading(true);
-			const response = await axios.get(`${API_URL}/books`);
+			const response = await axios.get(
+				`${API_URL}/books?includeHidden=true`
+			);
 			setBooks(response.data);
 			setError(null);
 		} catch (err) {
@@ -87,13 +93,52 @@ const Admin: React.FC = () => {
 				}
 			);
 			setNewBooksMessage(response.data.message);
-			// Refresh the books list
 			fetchBooks();
 		} catch (err) {
 			console.error('Error fetching new books:', err);
 			setNewBooksMessage('Failed to fetch new books. Please try again.');
 		} finally {
 			setFetchingNewBooks(false);
+		}
+	};
+
+	const handleToggleHidden = async (id: string) => {
+		try {
+			const response = await axios.put(
+				`${API_URL}/admin/books/${id}/toggle-hidden`,
+				{},
+				{
+					auth: {
+						username,
+						password,
+					},
+					headers: {
+						'Content-Type': 'application/json',
+						Accept: 'application/json',
+					},
+				}
+			);
+
+			if (response.data) {
+				setBooks((prevBooks) =>
+					prevBooks.map((book) =>
+						book.id === id
+							? { ...book, hidden: !book.hidden }
+							: book
+					)
+				);
+			}
+		} catch (err) {
+			console.error('Error toggling book hidden status:', err);
+			if (axios.isAxiosError(err) && err.response?.status === 401) {
+				setError(
+					'Authentication failed. Please check your credentials.'
+				);
+			} else {
+				setError(
+					'Failed to toggle book hidden status. Please try again.'
+				);
+			}
 		}
 	};
 
@@ -150,7 +195,7 @@ const Admin: React.FC = () => {
 				<button
 					onClick={handleFetchNewBooks}
 					disabled={fetchingNewBooks}
-					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
+					className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'>
 					{fetchingNewBooks ? 'Fetching...' : 'Fetch New Books'}
 				</button>
 				{newBooksMessage && (
@@ -177,6 +222,15 @@ const Admin: React.FC = () => {
 								handleUpdateImage(book.id, e.target.value)
 							}
 						/>
+						<button
+							onClick={() => handleToggleHidden(book.id)}
+							className={`mt-2 px-4 py-2 rounded ${
+								book.hidden
+									? 'bg-green-500 hover:bg-green-700'
+									: 'bg-red-500 hover:bg-red-700'
+							} text-white font-bold`}>
+							{book.hidden ? 'Unhide' : 'Hide'}
+						</button>
 					</div>
 				))}
 			</div>

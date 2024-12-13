@@ -8,6 +8,7 @@ import {
 	fetchRssFeed,
 	updateBookImage,
 	fetchNewBooks,
+	toggleBookHidden,
 } from './services/rssFeed';
 import sequelize from './config/database';
 import path from 'path';
@@ -16,7 +17,6 @@ import * as postmark from 'postmark';
 
 dotenv.config();
 
-// Log Postmark configuration (without exposing sensitive data)
 console.log('Postmark configuration loaded:', {
 	hasApiKey: !!process.env.POSTMARK_API_KEY,
 	fromEmail: process.env.POSTMARK_FROM_EMAIL,
@@ -26,7 +26,6 @@ console.log('Postmark configuration loaded:', {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Configure CORS
 const allowedOrigins = [
 	'http://localhost:5173',
 	'http://127.0.0.1:5173',
@@ -46,7 +45,6 @@ app.use(
 	})
 );
 
-// Security headers middleware
 app.use((req, res, next) => {
 	res.setHeader(
 		'Content-Security-Policy',
@@ -57,16 +55,13 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-// Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../../client/dist')));
 
-// Basic Auth Middleware
 const adminAuth = basicAuth({
 	users: { admin: process.env.ADMIN_PASSWORD || 'changeme' },
 	challenge: true,
 });
 
-// Configure Umzug for migrations
 const umzug = new Umzug({
 	migrations: {
 		glob: 'src/migrations/*.ts',
@@ -87,13 +82,11 @@ const umzug = new Umzug({
 	logger: console,
 });
 
-// Create Postmark client
 const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY || '');
 
-// API Routes
 app.get('/api/books', async (req, res) => {
 	try {
-		const feedItems = await getFeed();
+		const feedItems = await getFeed(req.query.includeHidden === 'true');
 		res.json(feedItems);
 	} catch (error) {
 		console.error('Error fetching books:', error);
@@ -101,7 +94,6 @@ app.get('/api/books', async (req, res) => {
 	}
 });
 
-// Admin route to update book image
 app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	const { id } = req.params;
 	const { image_url } = req.body;
@@ -119,7 +111,29 @@ app.put('/api/admin/books/:id', adminAuth, async (req, res) => {
 	}
 });
 
-// New endpoint to fetch new books
+app.put('/api/admin/books/:id/toggle-hidden', adminAuth, async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		if (!id) {
+			return res.status(400).json({ error: 'Book ID is required' });
+		}
+
+		const updatedBook = await toggleBookHidden(id);
+		if (!updatedBook) {
+			return res.status(404).json({ error: 'Book not found' });
+		}
+
+		return res.status(200).json(updatedBook);
+	} catch (error) {
+		console.error('Error toggling book hidden status:', error);
+		return res.status(500).json({
+			error: 'Failed to toggle book hidden status',
+			details: error instanceof Error ? error.message : 'Unknown error',
+		});
+	}
+});
+
 app.post('/api/admin/fetch-new-books', adminAuth, async (req, res) => {
 	try {
 		const newBooks = await fetchNewBooks();
@@ -130,7 +144,6 @@ app.post('/api/admin/fetch-new-books', adminAuth, async (req, res) => {
 	}
 });
 
-// Contact form email sending route
 app.post('/api/contact', async (req, res) => {
 	const { name, email, message } = req.body;
 
@@ -141,11 +154,9 @@ app.post('/api/contact', async (req, res) => {
 			message,
 		});
 
-		// Use the verified domain email addresses
-		const fromEmail = 'jace@talkwithjace.com'; // or any verified email on your domain
-		const toEmail = 'jace@talkwithjace.com'; // or any other email on your domain
+		const fromEmail = 'jace@talkwithjace.com';
+		const toEmail = 'jace@talkwithjace.com';
 
-		// Send email using Postmark
 		const response = await client.sendEmail({
 			From: fromEmail,
 			To: toEmail,
@@ -167,7 +178,6 @@ app.post('/api/contact', async (req, res) => {
 	}
 });
 
-// Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, '../../client/dist/index.html'));
 });

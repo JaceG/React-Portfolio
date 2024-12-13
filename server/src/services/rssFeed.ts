@@ -19,11 +19,9 @@ export async function fetchRssFeed() {
 				const imageUrl = extractImageUrl(item.content);
 				const description = extractDescription(item.content);
 
-				// Regex to match the src attribute
 				const regexImage = /src="(.+?)"/;
 				const authorRegex = /author:\s?(.+?)\<br\/\>/;
 
-				// Use the match method to extract the value
 				const regexImageMatch = item.content.match(regexImage);
 				const regexAuthorMatch = item.content.match(authorRegex);
 
@@ -64,9 +62,11 @@ export async function fetchRssFeed() {
 	}
 }
 
-export async function getFeed() {
+export async function getFeed(includeHidden: boolean = false) {
 	try {
+		const whereClause = includeHidden ? {} : { hidden: false };
 		const feedItems = await RssFeedItem.findAll({
+			where: whereClause,
 			order: [['pubDate', 'DESC']],
 			limit: 200,
 		});
@@ -139,6 +139,26 @@ export async function fetchNewBooks() {
 		return newBooks;
 	} catch (error) {
 		console.error('Error fetching new books:', error);
+		throw error;
+	}
+}
+
+export async function toggleBookHidden(id: string) {
+	try {
+		const book = await RssFeedItem.findByPk(id);
+		if (!book) {
+			console.error(`Book with id ${id} not found`);
+			return null;
+		}
+
+		book.hidden = !book.hidden;
+		const savedBook = await book.save();
+		console.log(
+			`Successfully toggled hidden status for book ${id} to ${book.hidden}`
+		);
+		return savedBook;
+	} catch (error) {
+		console.error('Error toggling book hidden status:', error);
 		throw error;
 	}
 }
