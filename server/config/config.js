@@ -1,15 +1,34 @@
-'use strict';
+require('dotenv').config();
 
 module.exports = {
-	up: async (queryInterface, Sequelize) => {
-		await queryInterface.addColumn('RssFeedItems', 'order', {
-			type: Sequelize.INTEGER,
-			allowNull: false,
-			defaultValue: 0,
-		});
+	development: {
+		use_env_variable: 'DATABASE_URL',
+		dialect: 'postgres',
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			},
+		},
 	},
-
-	down: async (queryInterface, Sequelize) => {
-		await queryInterface.removeColumn('RssFeedItems', 'order');
+	test: {
+		use_env_variable: 'DATABASE_URL',
+		dialect: 'postgres',
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			},
+		},
+	},
+	production: {
+		use_env_variable: 'DATABASE_URL',
+		dialect: 'postgres',
+		dialectOptions: {
+			ssl: {
+				require: true,
+				rejectUnauthorized: false,
+			},
+		},
 	},
 };
