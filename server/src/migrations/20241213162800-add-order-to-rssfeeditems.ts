@@ -1,6 +1,4 @@
-'use strict';
-
-import { QueryInterface, DataTypes, Sequelize } from 'sequelize';
+import { QueryInterface, Sequelize, DataTypes } from 'sequelize';
 
 module.exports = {
 	async up(queryInterface: QueryInterface, Sequelize: typeof DataTypes) {
