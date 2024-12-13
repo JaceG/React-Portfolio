@@ -27,6 +27,8 @@ const allowedOrigins = [
 	'http://127.0.0.1:5173',
 	'https://react-portfolio-7z0l.onrender.com',
 	'https://react-portfolio-7z0l.onrender.com/',
+	'https://www.hirejace.com',
+	'https://hirejace.com',
 ];
 
 app.use(
@@ -43,7 +45,7 @@ app.use(
 app.use((req, res, next) => {
 	res.setHeader(
 		'Content-Security-Policy',
-		"default-src 'self'; connect-src 'self' https://react-portfolio-7z0l.onrender.com https://react-portfolio-7z0l.onrender.com/api/* http://localhost:3001 http://localhost:3001/api/*; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
+		"default-src 'self'; connect-src 'self' https://react-portfolio-7z0l.onrender.com https://react-portfolio-7z0l.onrender.com/api/* http://localhost:3001 http://localhost:3001/api/* https://www.hirejace.com https://hirejace.com; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: http:; script-src 'self' 'unsafe-inline' 'unsafe-eval';"
 	);
 	next();
 });

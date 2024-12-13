@@ -12,8 +12,12 @@ interface Book {
 	description: string;
 }
 
-// Update API URL to use the deployed server URL
-const API_URL = 'https://react-portfolio-7z0l.onrender.com/api';
+// Dynamic API URL based on the current hostname
+const API_URL =
+	window.location.hostname === 'localhost' ||
+	window.location.hostname === '127.0.0.1'
+		? 'http://localhost:3001/api'
+		: 'https://react-portfolio-7z0l.onrender.com/api';
 
 const Books: React.FC = () => {
 	const [books, setBooks] = useState<Book[]>([]);
