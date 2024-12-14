@@ -38,6 +38,7 @@
       "@types/cors": "^2.8.13",
       "@types/express": "^4.17.17",
       "@types/node": "^20.4.1",
+      "@types/postmark": "^2.0.3",
       "sequelize-cli": "^6.6.1",
       "ts-node-dev": "^2.0.0"
     }

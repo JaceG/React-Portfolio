@@ -9,7 +9,10 @@ module.exports = {
 			const tableInfo = await queryInterface.describeTable(
 				'RssFeedItems'
 			);
-			console.log('Current table structure:', tableInfo);
+			console.log(
+				'Current table structure:',
+				JSON.stringify(tableInfo, null, 2)
+			);
 
 			if (!tableInfo.order) {
 				console.log('Adding order column...');
@@ -21,7 +24,7 @@ module.exports = {
 				});
 
 				console.log('Setting initial order values...');
-				await queryInterface.sequelize.query(`
+				const updateResult = await queryInterface.sequelize.query(`
           WITH ranked AS (
             SELECT id, ROW_NUMBER() OVER (ORDER BY "pubDate" DESC) - 1 as new_order
             FROM "RssFeedItems"
@@ -31,6 +34,10 @@ module.exports = {
           FROM ranked
           WHERE "RssFeedItems".id = ranked.id;
         `);
+				console.log(
+					'Update result:',
+					JSON.stringify(updateResult, null, 2)
+				);
 
 				console.log('Migration completed successfully');
 			} else {
@@ -49,6 +56,11 @@ module.exports = {
 			const tableInfo = await queryInterface.describeTable(
 				'RssFeedItems'
 			);
+			console.log(
+				'Current table structure:',
+				JSON.stringify(tableInfo, null, 2)
+			);
+
 			if (tableInfo.order) {
 				console.log('Removing order column...');
 				await queryInterface.removeColumn('RssFeedItems', 'order');

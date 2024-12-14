@@ -14,8 +14,7 @@ import {
 import sequelize from './config/database';
 import path from 'path';
 import basicAuth from 'express-basic-auth';
-import * as postmark from 'postmark';
-import RssFeedItem from './models/RssFeedItem';
+import { ServerClient as PostmarkClient } from 'postmark';
 
 dotenv.config();
 
@@ -84,7 +83,7 @@ const umzug = new Umzug({
 	logger: console,
 });
 
-const client = new postmark.ServerClient(process.env.POSTMARK_API_KEY || '');
+const client = new PostmarkClient(process.env.POSTMARK_API_KEY || '');
 
 app.get('/api/books', async (req, res) => {
 	try {
@@ -237,12 +236,16 @@ app.get('*', (req, res) => {
 
 async function startServer() {
 	try {
+		console.log('Attempting to authenticate database connection...');
 		await sequelize.authenticate();
 		console.log('Database connection has been established successfully.');
 
 		console.log('Running migrations...');
-		await umzug.up();
-		console.log('Migrations completed successfully.');
+		const pendingMigrations = await umzug.pending();
+		console.log('Pending migrations:', pendingMigrations);
+
+		const executedMigrations = await umzug.up();
+		console.log('Executed migrations:', executedMigrations);
 
 		console.log('Syncing models...');
 		await sequelize.sync({ alter: true });
