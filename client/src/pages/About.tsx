@@ -14,34 +14,41 @@ const About: React.FC = () => {
 					alt='Profile Picture'
 					className='profile-pic'
 				/>
-				<p className='first-paragraph'>
-					<strong>Jace</strong> is a former digital marketer and newly
-					minted React developer and a recent graduate of{' '}
-					<a
-						href='https://eng-bootcamps.osu.edu/coding/'
-						target='_blank'
-						rel='noopener noreferrer'>
-						The Ohio State University's Full Stack Development
-						Bootcamp
-					</a>
-					, where he honed his skills in building responsive, dynamic
-					web applications with a focus on React. Combining a strong
-					foundation in modern JavaScript frameworks with a passion
-					for clean, efficient code, Jace has cultivated the technical
-					and problem-solving skills necessary to excel in the
-					fast-paced world of web app development. His former
-					experience in the world of marketing gives him a unique
-					perspective on user behavior and how to create applications
-					that not only look great but also provide a seamless user
-					experience. He understands that sometimes the needs of the
-					marketing team are not always what an engineer would think
-					is ideal, and can use this perspective to find solutions
-					that are ideal for both marketing goals while not
+				<div>
+					<p className='first-paragraph'>
+						<strong>Jace</strong> is a former digital marketer and
+						newly minted React developer and a recent graduate of{' '}
+						<a
+							href='https://eng-bootcamps.osu.edu/coding/'
+							target='_blank'
+							rel='noopener noreferrer'>
+							The Ohio State University's Full Stack Development
+							Bootcamp
+						</a>
+						, where he honed his skills in building responsive,
+						dynamic web applications with a focus on React.
+						Combining a strong foundation in modern JavaScript
+						frameworks with a passion for clean, efficient code,
+						Jace has cultivated the technical and problem-solving
+						skills necessary to excel in the fast-paced world of web
+						app development.
+					</p>
+				</div>
+			</div>
+			<div className='full-width-container'>
+				<p className='paragraph-with-margin full-width-paragraph'>
+					His former experience in the world of marketing gives him a
+					unique perspective on user behavior and how to create
+					applications that not only look great but also provide a
+					seamless user experience. He understands that sometimes the
+					needs of the marketing team are not always what an engineer
+					would think is ideal, and can use this perspective to find
+					solutions that are ideal for both marketing goals while not
 					sacrificing engineering principles.
 				</p>
 			</div>
 			<div>
-				<p className='second-paragraph'>
+				<p className='paragraph-with-margin'>
 					Beyond coding, what sets Jace apart is his skills in
 					leveraging advanced AI tools like ChatGPT from his{' '}
 					<Link to='/books'>unique interdisciplinary background</Link>{' '}
@@ -55,7 +62,7 @@ const About: React.FC = () => {
 				</p>
 			</div>
 			<div>
-				<p className='third-paragraph'>
+				<p className='paragraph-with-margin'>
 					Jace is eager to bring these diverse talents to a
 					collaborative team. He is actively exploring opportunities
 					in web development, AI, or any roles that benefit from his

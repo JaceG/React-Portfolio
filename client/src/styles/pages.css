@@ -1,0 +1,215 @@
+/* About Page Styles */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .first-paragraph {
+    flex: 1;
+  }
+  
+  .paragraph-with-margin {
+    margin-top: 1em;
+  }
+  
+  .profile-container > .profile-pic {
+    height: 100%;
+  }
+  
+  .first-paragraph::first-letter {
+    font-size: 5em;
+    font-weight: bold;
+    float: left;
+    margin-right: 10px;
+    line-height: 1;
+    color: var(--primary-color);
+  }
+  
+  .full-width-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+  
+  .full-width-paragraph {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+  }
+  
+  .second-paragraph {
+    margin-top: 10px;
+  }
+  
+  
+  /* Resume Page Styles */
+  .resume-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .download-link {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .download-link:hover {
+    background-color: var(--link-hover-color);
+  }
+  
+  .resume-section {
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    color: var(--secondary-color);
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+  }
+  
+  .summary-text {
+    font-size: 1.1em;
+    color: var(--text-color);
+  }
+  
+  .work-experience-list,
+  .education-list,
+  .skills-list,
+  .projects-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .work-item,
+  .education-item,
+  .project-item {
+    margin-bottom: 15px;
+  }
+  
+  .job-title,
+  .degree,
+  .project-name {
+    font-size: 1.2em;
+    color: var(--primary-color);
+  }
+  
+  .job-responsibilities {
+    list-style: disc;
+    padding-left: 20px;
+    color: var(--text-color);
+  }
+  
+  .skills-list li {
+    display: inline-block;
+    margin-right: 10px;
+    padding: 5px 10px;
+    background-color: var(--background-color);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.9em;
+  }
+  
+  .project-item p {
+    margin: 5px 0;
+  }
+  
+  .skills-list li {
+    margin: 3px;
+  }
+  
+  .small-title {
+    font-size: 1.2em;
+    font-weight: normal;
+  }
+  
+  /* Portfolio Page Styles */
+  .portfolio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Contact Page Styles */
+  .contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .contact-form {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .contact-info {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .contact-info h3 {
+    color: var(--secondary-color);
+    margin-bottom: 10px;
+  }
+  
+  .contact-info p {
+    margin: 5px 0;
+  }
+  
+  .contact-info a {
+    color: var(--link-color);
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Books Page Styles */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    padding: 20px 0;
+  }
+  
+  /* Admin Page Styles */
+  .admin-books-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  

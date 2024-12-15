@@ -1,0 +1,52 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Mono", sans-serif;
+  }
+  
+  /* CSS Variables for Colors */
+  :root {
+    --primary-color: #4CAF50;
+    --secondary-color: #333;
+    --background-color: #f4f4f9;
+    --text-color: #555;
+    --link-color: #4a90e2;
+    --link-hover-color: #45a049;
+    --footer-bg-color: #333;
+    --footer-text-color: #ccc;
+    --footer-link-color: #f4f4f4;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+  }
+  
+  /* Main Content Styles */
+  p {
+    text-align: justify;
+  }
+  
+  h2 {
+    color: var(--secondary-color);
+    margin-bottom: 60px;
+    font-size: 1.8em;
+    text-align: center;
+  }
+  
+  hr {
+    margin-bottom: 30px; /* Increase this value to add more space */
+  }
+  
+  a.active {
+    color: var(--secondary-color);
+  }
+  
+  .card-image {
+    height: 350px;
+  }
+  
+  

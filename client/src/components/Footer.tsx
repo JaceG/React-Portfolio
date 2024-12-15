@@ -4,11 +4,16 @@ import { SocialIcon } from 'react-social-icons';
 interface SocialLink {
 	url: string;
 	label: string;
+	style?: React.CSSProperties;
 }
 
 const Footer: React.FC = () => {
 	const socialLinks: SocialLink[] = [
-		{ url: 'https://github.com/', label: 'GitHub' },
+		{
+			url: 'https://github.com/',
+			label: 'GitHub',
+			style: { filter: 'invert(1)' },
+		},
 		{ url: 'https://linkedin.com/', label: 'LinkedIn' },
 		{ url: 'https://stackoverflow.com/', label: 'StackOverflow' },
 	];
@@ -36,7 +41,11 @@ const Footer: React.FC = () => {
 						<SocialIcon
 							key={link.label + index}
 							url={link.url}
-							style={{ height: 60, width: 60 }}
+							style={{
+								height: 60,
+								width: 60,
+								...(link.style || {}),
+							}}
 						/>
 					))}
 				</div>

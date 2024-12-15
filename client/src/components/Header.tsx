@@ -32,7 +32,7 @@ const Header: React.FC = () => {
 									to='/'
 									className='text-md-white'
 									onClick={handleClose}>
-									About Me
+									About
 								</Nav.Link>
 								<Nav.Link
 									as={Link}

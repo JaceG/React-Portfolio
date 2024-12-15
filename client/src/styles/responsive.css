@@ -1,0 +1,81 @@
+/* Media Queries */
+@media (min-width: 768px) {
+    .text-md-white {
+      color: white !important;
+    }
+
+    .text-white {
+        font-size: 24px;
+    }
+
+    .navbar-brand {
+        margin-bottom: 30px;
+      }
+  
+    .profile-container {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  
+    .profile-pic {
+      margin-right: 20px;
+      margin-bottom: 0;
+    }
+  }
+  
+  @media (max-width: 767.98px) {
+    .text-md-white {
+      color: white !important;
+    }
+
+    .text-white {
+        font-size: 24px;
+    }
+  
+    header {
+      padding: 20px;
+    }
+  
+    .navbar-brand {
+      margin-bottom: 30px;
+    }
+
+    .navbar-nav {
+      background-color: var(--primary-color);
+      padding: 5px; /* Updated padding */
+      letter-spacing: 0.2px; /* Added letter-spacing */
+    }
+  
+    .nav-link {
+      color: white !important;
+      text-align: center;
+      padding: 5px 7px; /* Added horizontal padding */
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  
+    .nav-link:last-child {
+      border-bottom: none;
+    }
+  
+    .offcanvas {
+      background-color: var(--primary-color);
+      width: 100% !important;
+    }
+  
+    .offcanvas-header .btn-close {
+      filter: invert(1);
+    }
+  
+    .offcanvas-title {
+      color: white;
+    }
+  
+    .offcanvas-body {
+      padding: 0;
+    }
+  
+    .offcanvas-body .navbar-nav {
+      width: 100%;
+    }
+  }
+
