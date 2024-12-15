@@ -8,6 +8,8 @@ import ReadmeGenerator from '../../../assets/images/Readme-Generator.png';
 import RpsGame from '../../../assets/images/RPS-Game.png';
 import VehicleBuilder from '../../../assets/images/Vehicle-Builder.png';
 import WeatherDashboard from '../../../assets/images/Weather-Dashboard.png';
+import KanbanBoard from '../../../assets/images/Kanban-Board.png';
+import PickFlick from '../../../assets/images/Pick-Flick.png';
 import JaceResumeDownload from '../../../assets/downloads/Jace-Resume.pdf';
 
 interface Images {
@@ -22,6 +24,8 @@ interface Images {
 	RpsGame: string;
 	VehicleBuilder: string;
 	WeatherDashboard: string;
+	KanbanBoard: string;
+	PickFlick: string;
 	JaceResumeDownload: string;
 }
 
@@ -36,6 +40,8 @@ const images: Images = {
 	RpsGame,
 	VehicleBuilder,
 	WeatherDashboard,
+	KanbanBoard,
+	PickFlick,
 	JaceResumeDownload,
 };
 

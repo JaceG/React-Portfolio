@@ -13,6 +13,64 @@ interface ProjectData {
 const Portfolio: React.FC = () => {
 	const projects: ProjectData[] = [
 		{
+			title: 'Random Movie Generator',
+			img: images.PickFlick,
+			links: [
+				{
+					name: 'App Link',
+					link: 'https://www.pickflick.app',
+				},
+				{
+					name: 'Repo Link',
+					link: 'https://github.com/JaceG/Pick-Flick',
+				},
+			],
+		},
+		{
+			title: 'Kanban Board',
+			img: images.KanbanBoard,
+			description: 'takes a minute to load!',
+			links: [
+				{
+					name: 'App Link',
+					link: 'https://kanban-board-2dzw.onrender.com/',
+				},
+				{
+					name: 'Repo Link',
+					link: 'https://github.com/JaceG/Kanban-Board',
+				},
+			],
+		},
+		{
+			title: 'Piano Player',
+			img: images.PianoPlayer,
+			links: [
+				{
+					name: 'App Link',
+					link: 'https://apgash.github.io/Piano-Project/',
+				},
+				{
+					name: 'Repo Link',
+					link: 'https://github.com/Apgash/Piano-Project',
+				},
+			],
+		},
+		{
+			title: 'Weather Dashboard',
+			img: images.WeatherDashboard,
+			description: 'takes a minute to load!',
+			links: [
+				{
+					name: 'App Link',
+					link: 'https://weather-dashboard-g7bd.onrender.com/',
+				},
+				{
+					name: 'Repo Link',
+					link: 'https://github.com/JaceG/Weather-Dashboard',
+				},
+			],
+		},
+		{
 			title: 'CSS Cheatsheet',
 			img: images.CssCheatsheet,
 			links: [
@@ -47,20 +105,6 @@ const Portfolio: React.FC = () => {
 				{
 					name: 'Repo Link',
 					link: 'https://github.com/JaceG/Employee-Tracker',
-				},
-			],
-		},
-		{
-			title: 'Piano Player',
-			img: images.PianoPlayer,
-			links: [
-				{
-					name: 'App Link',
-					link: 'https://apgash.github.io/Piano-Project/',
-				},
-				{
-					name: 'Repo Link',
-					link: 'https://github.com/Apgash/Piano-Project',
 				},
 			],
 		},
@@ -109,21 +153,6 @@ const Portfolio: React.FC = () => {
 				{
 					name: 'Repo Link',
 					link: 'https://github.com/JaceG/New-Vehicle-Generator',
-				},
-			],
-		},
-		{
-			title: 'Weather Dashboard',
-			img: images.WeatherDashboard,
-			description: 'takes a minute to load!',
-			links: [
-				{
-					name: 'App Link',
-					link: 'https://weather-dashboard-g7bd.onrender.com/',
-				},
-				{
-					name: 'Repo Link',
-					link: 'https://github.com/JaceG/Weather-Dashboard',
 				},
 			],
 		},
