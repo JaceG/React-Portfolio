@@ -10,11 +10,14 @@ interface SocialLink {
 const Footer: React.FC = () => {
 	const socialLinks: SocialLink[] = [
 		{
-			url: 'https://github.com/',
+			url: 'https://github.com/JaceG',
 			label: 'GitHub',
 			style: { filter: 'invert(1)' },
 		},
-		{ url: 'https://linkedin.com/', label: 'LinkedIn' },
+		{
+			url: 'https://linkedin.com/in/jace-galloway-6833a4249',
+			label: 'LinkedIn',
+		},
 		{ url: 'https://stackoverflow.com/', label: 'StackOverflow' },
 	];
 
