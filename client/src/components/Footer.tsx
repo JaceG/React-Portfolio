@@ -44,6 +44,8 @@ const Footer: React.FC = () => {
 						<SocialIcon
 							key={link.label + index}
 							url={link.url}
+							target='_blank'
+							rel='noopener noreferrer'
 							style={{
 								height: 60,
 								width: 60,
